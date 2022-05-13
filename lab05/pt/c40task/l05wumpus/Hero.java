@@ -3,10 +3,12 @@ import java.util.Random;
 
 public class Hero extends Components {
     boolean hasArrow;
+    String name;
     
-    public Hero(int i, int j){
+    public Hero(int i, int j, String name){
         this.i = i;
         this.j = j;
+        this.name = name;
     
     }
 
@@ -14,8 +16,11 @@ public class Hero extends Components {
 
     }
 
-    public void move(char dir){
-        
+    public void move(int x, int y){
+        if (this.world.canMove(x, y)){
+            this.world
+
+        }        
     }
 
     public void die(){

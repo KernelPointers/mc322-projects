@@ -15,5 +15,11 @@ public class Cave {
 
     }
 
+    public boolean canMove(int i, int j){
+        if (i > -1 && i < this.num && j > -1 && j < this.num)
+            return true;
+        return false;
+    }
+
 
 }
