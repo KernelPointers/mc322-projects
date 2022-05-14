@@ -2,7 +2,8 @@ package pt.c40task.l05wumpus;
 import java.util.Random;
 
 public class Hero extends Components {
-    boolean hasArrow;
+    boolean hasArrow = true;
+    boolean equipedArrow = false;
     String name;
     
     public Hero(int i, int j, String name){
@@ -40,5 +41,4 @@ public class Hero extends Components {
         this.hasArrow = false;
     }
 
-    }
-
+}
