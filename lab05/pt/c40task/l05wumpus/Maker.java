@@ -1,16 +1,17 @@
 package pt.c40task.l05wumpus;
 
 public class Maker {
-        
+    
     public void Mount(String cave[][], Cave world){
-        for (int i = 0; i < cave.length; i++){
 
+        for (int i = 0; i < cave.length; i++){
             for (int j = 0; j < cave[i].length; j++){
+
                 room = cave[i][j];
 
                 if (room.isEquals("P")){
-                    Hero player = new Hero(i, j);
-                    player.Connect(world);
+                    Hero p = new Hero(i, j);
+                    p.Connect(world);
                 }
 
                 else if (room.isEquals("B")){
@@ -31,7 +32,4 @@ public class Maker {
         }
     }
 
-
-
 }
-
