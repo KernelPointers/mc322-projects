@@ -16,11 +16,10 @@ public class AppWumpus {
       Cave world = new World();
       
       String cave[][] = tk.retrieveCave();
-
+      
       Maker init = new Maker();
-
       init.Mount(cave, world);
-
+      
       System.out.println("=== Caverna");
       for (int l = 0; l < cave.length; l++) {
          for (int c = 0; c < cave[l].length; c++)
@@ -28,18 +27,17 @@ public class AppWumpus {
          System.out.println();
       }
       
-      String movements = tk.retrieveMovements();
+      if (arquivoMovimentos == null) { //rever
+         Control.Move();
 
+      }
+      else {
+         String movements = tk.retrieveMovements();  
       
+      }
 
-
-
-
-
-      
       tk.writeBoard(finalCave, score, status);
       
       tk.stop();
    }
-
 }
