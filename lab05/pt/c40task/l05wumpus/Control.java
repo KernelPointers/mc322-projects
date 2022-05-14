@@ -12,6 +12,11 @@ public class Control {
 
     }
 
+    public void Move() {
+        System.out.print("Escolha o nome do seu personagem: ");
+        Scanner.keyboard = new.Scanner(System.in);
+        String nick = keyboard.nextLine();
+    }
+
 
 }
-
