@@ -1,4 +1,4 @@
-public class Wumpus {
+public class Wumpus extends Components {
 
     public Wumpus(int i, int j){
         this.i = i;
@@ -27,13 +27,5 @@ public class Wumpus {
         } 
 
     }
-
-
-
-
-
-
-
-
 
 }
