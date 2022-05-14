@@ -1,11 +1,10 @@
-public class Hole {
+public class Hole extends Components {
 
     public Hole(int i, int j){
         this.i = i;
         this.j = j;
 
     }
-
 
     public void setWind(){
         int dim = this.world.num;
@@ -29,13 +28,4 @@ public class Hole {
 
     }
 
-
-
-
-
-
-
-
-
 }
-
