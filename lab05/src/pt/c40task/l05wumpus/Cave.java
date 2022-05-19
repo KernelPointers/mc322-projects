@@ -2,6 +2,7 @@ package pt.c40task.l05wumpus;
 
 public class Cave {
     private int num = 4;
+    private Toolkit writer;
     private Room map[][] = new Room[num][num];
 
     public Cave(){
@@ -14,6 +15,10 @@ public class Cave {
 
     public int getNum(){
         return this.num;
+    }
+
+    public void connectOut(Toolkit writer){
+        this.writer = writer;
     }
 
     public void addComp(Components c, int i, int j){
@@ -99,14 +104,22 @@ public class Cave {
         System.out.println("Player: " + name);
         System.out.println("Score: " + score);
         
-        
-        if (!life)
+        char status = 'P';
+        if (!life){
             System.out.println("Voce perdeu =( ...");
-        else if (win)
+            status = 'L';
+        }else if (win){
             System.out.println("Voce ganhou =D !!!");
-        
+            status = 'W';
+        }
+       
+       writer.writeBoard(this, score, status); 
+
         System.out.println();
     }
+
+
+    
 
     public char getRoomChar(int i, int j){
         return this.map[i][j].getStatusID();

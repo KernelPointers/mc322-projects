@@ -14,6 +14,8 @@ public class AppWumpus {
       Toolkit tk = Toolkit.start(arquivoCaverna, arquivoSaida, arquivoMovimentos);
       
       Cave world = new Cave(); // rever instanciacao da caverna
+
+      world.connectOut(tk);
       
       String inputCave[][] = tk.retrieveCave(); // matriz inicial dado arquivo cave.csv
       
@@ -23,8 +25,7 @@ public class AppWumpus {
 
       Maker init = new Maker();
       init.mount(inputCave, world, controller);
-      
-       
+
       controller.moveControl();
 
       tk.stop();

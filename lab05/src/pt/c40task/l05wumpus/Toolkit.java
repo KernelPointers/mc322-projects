@@ -74,7 +74,7 @@ public class Toolkit {
       return v;
    }
    
-   public void writeBoard(Cave world, Control ctrl){
+   public void writeBoard(Cave world, int score, char status){
       try {
          if (!firstBoard)
             outputStr.println("=====");
@@ -84,9 +84,8 @@ public class Toolkit {
                outputStr.print(world.getRoomChar(i, j));
             outputStr.println();
          }
-         outputStr.println("score: " + ctrl.getPlayerScore()); 
-         ctrl.changeStatus();
-         outputStr.println("status: " + ctrl.getStatus());
+         outputStr.println("score: " + score); 
+         outputStr.println("status: " + status);
         
          firstBoard = false;
       } catch(Exception erro){

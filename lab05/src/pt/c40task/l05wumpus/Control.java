@@ -126,6 +126,7 @@ public class Control {
     
     public void collectGold(){
        this.player.collect(this.gold);
+       this.player.updateCave();
     }
 
     public int getPlayerScore(){
