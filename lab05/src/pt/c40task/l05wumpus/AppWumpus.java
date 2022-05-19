@@ -15,19 +15,30 @@ public class AppWumpus {
       
       Cave world = new World(); // rever instanciacao da caverna
       
-      String cave[][] = tk.retrieveCave(); // matriz inicial dado arquivo cave.csv
+      String inputCave[][] = tk.retrieveCave(); // matriz inicial dado arquivo cave.csv
       
       Maker init = new Maker();
-      init.mount(cave, world);
+      init.mount(inputCave, world);
       
       System.out.println("=== Caverna");
-      for (int l = 0; l < cave.length; l++) {
-         for (int c = 0; c < cave[l].length; c++)
-            System.out.print(cave[l][c] + ((c < cave[l].length-1) ? ", " : ""));
+
+    // for (){
+
+        // world.displayCave();
+        
+
+
+        // world.updateCave();
+    // }
+
+
+      for (int l = 0; l < inputCave.length; l++) {
+         for (int c = 0; c < inputCave[l].length; c++)
+            System.out.print(inputCave[l][c] + ((c < inputCave[l].length-1) ? ", " : ""));
          System.out.println();
       }
 
-      movements = tk.retrieveMovements()
+      movements = tk.retrieveMovements();
         
       Control controller = new Control(movements);
 

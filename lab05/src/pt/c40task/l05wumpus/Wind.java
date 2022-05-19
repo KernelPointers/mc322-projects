@@ -1,8 +1,7 @@
 public class Wind extends Secondary {
 
-    public Wind(int i, int j){
-        this.i = i;
-        this.j = j;
+    public Wind(int i, int j, char id){
+        super(i, j, id);
     } 
 
 }

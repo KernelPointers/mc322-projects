@@ -1,3 +1,5 @@
+package pt.c40task.l05wumpus;
+
 
 public class Secondary extends Components{
 
@@ -6,6 +8,8 @@ public class Secondary extends Components{
         this.j = j;
         this.id = id;
     }
+
+
 
 
 }
