@@ -91,7 +91,13 @@ public class Cave {
 
    }
 
-    public void displayCave(String name, int score, boolean win, boolean life){
+
+   public void printRoomItems(int i, int j){
+        Room room = this.map[i][j];
+        room.printItems();
+   }
+
+    public void displayCave(String name, int a, int b, int score, boolean win, boolean life){
         for (int i = 0; i < this.num; i++){
             for(int j = 0; j < this.num; j++){
                 Room room = map[i][j];
@@ -103,7 +109,8 @@ public class Cave {
 
         System.out.println("Player: " + name);
         System.out.println("Score: " + score);
-        
+        this.printRoomItems(a, b);
+
         char status = 'P';
         if (!life){
             System.out.println("Voce perdeu =( ...");

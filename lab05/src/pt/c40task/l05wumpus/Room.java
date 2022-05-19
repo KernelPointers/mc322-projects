@@ -21,6 +21,29 @@ public class Room {
         this.setPriority();
     }
 
+    public void printItems(){
+        int len = this.items.size();
+        boolean first = true;
+        int c; 
+
+        for (int i = 0; i < len; i++){
+            if (first)
+                System.out.print("Items: ");
+            if (this.items.get(i).id != 'P'){
+                if (this.hasHole() || this.hasWumpus())
+                    c = len - 1;
+                else
+                    c = len - 2;
+                System.out.print(this.items.get(i).id + ((i < c) ? ", " : ""));
+            }else if (len == 1)
+                System.out.print("empty");
+            first = false; 
+        }
+        System.out.println();
+        
+
+    }
+
     public void togglePlayerPresence(){
         this.hasPlayerBeen = true;
     }
@@ -60,22 +83,29 @@ public class Room {
     public boolean comp(char a, char b){
         if (b == 'W' || b == 'O' || b =='B')
             return true;
-        if (b == 'P' && (a == 'W'  || a == 'O' ||  a == 'B'))
-            return false;
-        else if (b == 'P')
-            return true;
-        else if (b == 'f' && a == 'P')
-            return false;
-        else if (b == 'f')
-            return true;
-        else if (b == 'b' && a == 'f')
-            return false;
-        else if (b == 'b')
-            return true;
-        else if (b == '#')
-            return false;
         else 
-            return false;
+            if (a == 'W'  || a == 'O' ||  a == 'B')
+                return false;
+            else 
+                if (b == 'P')
+                    return true;
+                else 
+                    if (b == 'f' && a == 'P')
+                        return false;
+                    else 
+                        if (b == 'f')
+                            return true;
+                        else 
+                            if (b == 'b' && a == 'f')
+                                return false;
+                            else 
+                                if (b == 'b')
+                                    return true;
+                                else 
+                                    if (b == '#' && a == 'b')
+                                        return false;
+                                    else 
+                                        return false;
     }
     
     public boolean hasWumpus(){

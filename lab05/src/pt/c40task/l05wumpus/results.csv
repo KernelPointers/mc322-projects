@@ -5,79 +5,58 @@ P---
 score: 0
 status: P
 =====
-#---
-P---
+#P--
+----
 ----
 ----
 score: -15
 status: P
 =====
-#---
-#---
-P---
+##P-
+----
+----
 ----
 score: -30
 status: P
 =====
-#---
-#---
-b---
-P---
-score: -45
+##b-
+--P-
+----
+----
+score: -145
 status: P
 =====
-#---
-#---
-b---
-#P--
-score: -60
+##b-
+--P-
+----
+----
+score: -145
 status: P
 =====
-#---
-#---
-b---
-#bO-
-score: -75
+##P-
+--f-
+----
+----
+score: -160
 status: P
 =====
-#---
-#---
-b---
-#bP-
-score: -75
+#Pb-
+--f-
+----
+----
+score: -175
 status: P
 =====
-#---
-#---
-b---
-#P#-
-score: -90
+P#b-
+--f-
+----
+----
+score: -190
 status: P
 =====
-#---
-#---
-b---
-Pb#-
-score: -105
+P#b-
+--f-
+----
+----
+score: -190
 status: P
-=====
-#---
-#---
-P---
-#b#-
-score: -120
-status: P
-=====
-#---
-P---
-b---
-#b#-
-score: -135
-status: P
-=====
-P---
-#---
-b---
-#b#-
-score: 850
-status: W

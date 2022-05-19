@@ -109,9 +109,17 @@ public class Hero extends Primary {
         return this.score;
     }
 
+    public int getI(){
+        return this.i;
+    }
+
+    public int getJ(){
+        return  this.j;
+    }
+
     public void updateCave(){
         boolean gs = this.gameStatus();
-        this.world.displayCave(this.name, this.score, gs, this.life);
+        this.world.displayCave(this.name, this.i, this.j, this.score, gs, this.life);
     }
 
 }
