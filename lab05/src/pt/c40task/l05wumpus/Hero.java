@@ -10,9 +10,13 @@ public class Hero extends Primary {
     private String name;
     private int score = 0;
     
-    public Hero(int i, int j){
+    public Hero(int i, int j, char id){
         super(i, j, 'P');
     
+    }
+
+    public void setName(){
+        this.name = "Alcebiades";
     }
 
     public void setName(String name){
@@ -59,10 +63,8 @@ public class Hero extends Primary {
     } 
 
     public void collect(){
-       if (this.world.hasGold){
+       if (this.world.hasGold(i, j))
            this.hasGold = true;
-
-       }
     }
 
     public void shoot(){
@@ -74,7 +76,7 @@ public class Hero extends Primary {
 
             if (rand.nextBoolean())
                 this.kill();
-            else  
+            else
                 this.die();
 
         }
@@ -82,7 +84,6 @@ public class Hero extends Primary {
         this.equipedArrow = false;
         this.hasArrow = false;
     }
-
 
     public boolean gameStatus(){
         if (this.i == 0 && this.j == 0 && this.hasGold){
@@ -102,6 +103,5 @@ public class Hero extends Primary {
     public void updateCave(){
         this.world.displayCave(this.name, this.score, this.gameStatus(), this.life);
     }
-
 
 }

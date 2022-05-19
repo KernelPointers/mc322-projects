@@ -13,7 +13,7 @@ public class AppWumpus {
                                   String arquivoMovimentos) {
       Toolkit tk = Toolkit.start(arquivoCaverna, arquivoSaida, arquivoMovimentos);
       
-      Cave world = new World(); // rever instanciacao da caverna
+      Cave world = new Cave(); // rever instanciacao da caverna
       
       String inputCave[][] = tk.retrieveCave(); // matriz inicial dado arquivo cave.csv
       
@@ -25,12 +25,11 @@ public class AppWumpus {
     // for (){
 
         // world.displayCave();
-        
+
 
 
         // world.updateCave();
     // }
-
 
       for (int l = 0; l < inputCave.length; l++) {
          for (int c = 0; c < inputCave[l].length; c++)
@@ -38,23 +37,12 @@ public class AppWumpus {
          System.out.println();
       }
 
-      movements = tk.retrieveMovements();
-        
+      String movements = tk.retrieveMovements();
+
       Control controller = new Control(movements);
 
-      controller.move();
+      controller.moveControl();
 
-      if (arquivoMovimentos == null) { //rever
-         Control.Move();
-
-      }
-      else {
-         String movements = tk.retrieveMovements();  
-      
-      }
-
-      tk.writeBoard(finalCave, score, status);
-      
       tk.stop();
    }
 }

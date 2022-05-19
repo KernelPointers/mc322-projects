@@ -1,6 +1,5 @@
 package pt.c40task.l05wumpus;
 
-
 public class Secondary extends Components{
 
     public Secondary(int i, int j, char id){
@@ -8,8 +7,4 @@ public class Secondary extends Components{
         this.j = j;
         this.id = id;
     }
-
-
-
-
 }

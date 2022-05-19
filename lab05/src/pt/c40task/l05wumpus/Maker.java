@@ -12,31 +12,28 @@ public class Maker {
                 String room = caveStr[i][j];
 
                 if (room.equals("P")){
-                    Hero p = new Hero(i, j);
+                    Hero p = new Hero(i, j, 'O');
                     p.connect(world);
                 }
 
                 else if (room.equals("B")){
-                    Hole h = new Hole(i, j);
+                    Hole h = new Hole(i, j, 'B');
                     h.connect(world);
                     h.setSec();
                 }
 
                 else if (room.equals("W")){
-                    Wumpus w = new Wumpus(i, j);
+                    Wumpus w = new Wumpus(i, j, 'W');
                     w.connect(world);
                     w.setSec();
                 }
 
                 else if (room.equals("O")){
-                    Gold g = new Gold();
+                    Gold g = new Gold(i, j, 'O');
                     g.connect(world);
                 }
             }
         }
-
-
-
     }
 
 }

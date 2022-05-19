@@ -2,12 +2,12 @@ package pt.c40task.l05wumpus;
 
 public abstract class Components {
     protected int i, j;
-    protected Cave world; 
+    protected Cave world;
     protected char id;
 
     public void connect(Cave world){
         this.world = world;
-        world.addComp(this);
+        world.addComp(this, i, j);
     }
 
 }

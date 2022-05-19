@@ -2,7 +2,7 @@ package pt.c40task.l05wumpus;
 import java.util.ArrayList;
 
 public class Room {
-    ArrayList<Components> items = new ArrayList();
+    ArrayList<Components> items = new ArrayList<Components>();
     private char statusID;
     private boolean hasPlayerBeen = false;
 
@@ -48,19 +48,19 @@ public class Room {
                 if (item == 'W' || item == 'O' || item == 'B'){
                     this.statusID = item;
                     return;
-                } else if (item = 'P'){
+                } else if (item == 'P'){
                     this.statusID = item;
                     return;
-                } else if (item = 'f'){
+                } else if (item == 'f'){
                     this.statusID = item;
                     return;
-                } else {
+                } else if (item == 'b'){
                     this.statusID = item;
                     return;
                 }
-                
+            }
+            this.statusID = '#';
 
-            }   
         }
         this.statusID = '-'; 
 
@@ -96,6 +96,4 @@ public class Room {
 
     }
 
-
 }
-

@@ -1,7 +1,6 @@
 package pt.c40task.l05wumpus;
 import java.util.Scanner;
 
-
 public class Control {
     private String moves;
     private Hero player;
@@ -13,14 +12,14 @@ public class Control {
     }
 
     public void moveControl() {
-        if (this.moves.isEquals(""))
+        if (this.moves.equals(""))
             moveFile();
-        else 
+        else
             moveUser();
     }
 
     public void moveFile() {
-        player.setName = "Alcebiades";
+        player.setName();
         int len = this.moves.length();
         for (int i = 0; i < len && this.player.isAlive(); i++){
             char cmd = this.moves.charAt(i);
@@ -38,7 +37,6 @@ public class Control {
 
     }
 
-
     public void setPlayerName(){
         Scanner scanner = new Scanner(System.in);
 
@@ -47,8 +45,9 @@ public class Control {
         String name = scanner.nextLine();
         this.player.setName(name);
 
-    }
+        scanner.close();
 
+    }
 
     public void moveUser(){
         this.setPlayerName();
@@ -58,7 +57,7 @@ public class Control {
         while(this.player.isAlive()){
             cmd = scanner.nextLine();       
             char cmd_char = cmd.charAt(0);
-            switch (cmd) {
+            switch (cmd_char) {
                 case 'w' :  moveUp(); break;
                 case 's' :  moveDown(); break;
                 case 'd' :  moveRight(); break;
@@ -67,10 +66,10 @@ public class Control {
                 case 'c' :  this.player.collect(); break;
                 case 'q' :  quit(); break;
                 default : System.out.println("Error: command not found");
-
             }
 
         }
+        scanner.close();
     }
     
 
@@ -104,8 +103,7 @@ public class Control {
         System.out.println("Volte sempre !");
         player.setLife(false);
         
-        // finalizar
-       
-
+        // finalizar       
     }
+    
 }

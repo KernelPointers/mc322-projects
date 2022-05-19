@@ -1,14 +1,13 @@
+package pt.c40task.l05wumpus;
+
 public class Hole extends Obstacle{
 
-    public Hole(int i, int j){
-        this.i = i;
-        this.j = j;
-        this.id = 'B';
-
+    public Hole(int i, int j, char id){
+        super(i, j, 'B');
     }
 
     @Override
-    public void newSec(int i, int j){
+    public void newSec(Cave c, int i, int j){
         Wind w = new Wind(i, j, 'b');
         c.addComp(w, i, j);
         
