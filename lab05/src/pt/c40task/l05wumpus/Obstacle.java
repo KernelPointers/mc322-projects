@@ -13,13 +13,13 @@ public abstract class Obstacle extends Primary{
         if (j - 1 > -1)
             this.newSec(c, i, j - 1);
         
-        if (j < dim)
+        if (j < dim-1)
             this.newSec(c, i, j + 1);
             
         if (i - 1 > -1)
             this.newSec(c, i - 1, j);
 
-        if (i < dim)
+        if (i < dim-1)
             this.newSec(c, i + 1, j);
     }
     

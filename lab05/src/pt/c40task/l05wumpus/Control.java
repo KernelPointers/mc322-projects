@@ -8,14 +8,18 @@ public class Control {
 
     public Control(String moves){
         this.moves = moves;
-
     }
+
+    public void connect(Hero player){
+        this.player = player;
+    }
+    
 
     public void moveControl() {
         if (this.moves.equals(""))
-            moveFile();
-        else
             moveUser();
+        else
+            moveFile();
     }
 
     public void moveFile() {

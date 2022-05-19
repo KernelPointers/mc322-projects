@@ -2,37 +2,47 @@ package pt.c40task.l05wumpus;
 
 public class Maker {
     
-    public void mount(String caveStr[][], Cave world){
+    public void mount(String caveStr[][], Cave world, Control ctrl){
         // Constroi os componentes e conecta eles a caverna
-        int dim = world.getNum(); 
+        int dim = world.getNum();
 
-        for (int i = 0; i < dim; i++){
-            for (int j = 0; j < dim; j++){
+        int linha = 0, coluna = 0;
 
-                String room = caveStr[i][j];
+        for (int i = 0; i < dim*dim; i++){
+            for (int j = 0; j < 3; j++){
+                if (j == 2){
+                    String room = caveStr[i][j];
 
-                if (room.equals("P")){
-                    Hero p = new Hero(i, j, 'O');
-                    p.connect(world);
-                }
+                    if (room.equals("P")){
+                        Hero p = new Hero(linha, coluna, 'P');
+                        p.connect(world);                        
+                        ctrl.connect(p);
+                    }
 
-                else if (room.equals("B")){
-                    Hole h = new Hole(i, j, 'B');
-                    h.connect(world);
-                    h.setSec();
-                }
+                    else if (room.equals("B")){
+                        Hole h = new Hole(linha, coluna, 'B');
+                        h.connect(world);
+                        h.setSec();
+                    }
 
-                else if (room.equals("W")){
-                    Wumpus w = new Wumpus(i, j, 'W');
-                    w.connect(world);
-                    w.setSec();
-                }
+                    else if (room.equals("W")){
+                        Wumpus w = new Wumpus(linha, coluna, 'W');
+                        w.connect(world);
+                        w.setSec();
+                    }
 
-                else if (room.equals("O")){
-                    Gold g = new Gold(i, j, 'O');
-                    g.connect(world);
-                }
+                    else if (room.equals("O")){
+                        Gold g = new Gold(linha, coluna, 'O');
+                        g.connect(world);
+                    } 
+                }                
             }
+            if ((i+1) % 4 == 0) {
+                linha++;
+                coluna = 0;
+            }
+            else
+                coluna++;
         }
     }
 

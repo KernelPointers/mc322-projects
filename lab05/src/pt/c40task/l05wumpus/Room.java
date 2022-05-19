@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Room {
     ArrayList<Components> items = new ArrayList<Components>();
-    private char statusID;
+    private char statusID = '-';
     private boolean hasPlayerBeen = false;
 
     public void addItem(Components c){
@@ -43,24 +43,27 @@ public class Room {
         }
 
         if (this.hasPlayerBeen){
+            char max = items.get(0).id;
             for (int i = 0; i < len; i++){
+
                 item = items.get(i).id;
                 if (item == 'W' || item == 'O' || item == 'B'){
-                    this.statusID = item;
-                    return;
+                    max = item;
+
                 } else if (item == 'P'){
-                    this.statusID = item;
-                    return;
+                    if (max != 'W' || max != 'O' || max != 'B')
+                        max = item;
+
                 } else if (item == 'f'){
-                    this.statusID = item;
-                    return;
+                    if (max != 'W' || max != 'O' || max != 'B' || max != 'P')
+                        max = item;
+
                 } else if (item == 'b'){
-                    this.statusID = item;
-                    return;
+                    if (max != 'W' || max != 'O' || max != 'B' || max != 'P' || max != 'f')
+                        max = item;
                 }
             }
-            this.statusID = '#';
-
+            this.statusID = max;
         }
         this.statusID = '-'; 
 
