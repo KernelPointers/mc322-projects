@@ -31,7 +31,7 @@ public class Control {
 
     public void moveFile() {
         player.setName();
-        System.out.println("=== Caverna");
+        
         player.updateCave();
         int len = this.moves.length();
         for (int i = 0; i < len && this.player.isAlive(); i++){
@@ -64,14 +64,14 @@ public class Control {
     public void moveUser(){
         this.setPlayerName();
         
-        System.out.println("=== Caverna");
+     
         player.updateCave();// separar writeboard()
 
         Scanner scanner = new Scanner(System.in);
 
         String cmd;
 
-        while(this.player.isAlive()){
+        while(this.player.isAlive() && !this.player.gameStatus()){
             System.out.print("move: ");
             cmd = scanner.nextLine();                   
             char cmd_char = cmd.charAt(0);
@@ -85,6 +85,7 @@ public class Control {
                 case 'q' :  quit(); break;
                 default : System.out.println("Error: command not found");
             }
+
             
         }
         scanner.close();
