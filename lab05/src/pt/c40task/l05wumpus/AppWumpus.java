@@ -24,8 +24,7 @@ public class AppWumpus {
       Maker init = new Maker();
       init.mount(inputCave, world, controller);
       
-      System.out.println("=== Caverna");
- 
+       
       controller.moveControl();
 
       tk.stop();

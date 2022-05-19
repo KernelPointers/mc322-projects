@@ -6,6 +6,8 @@ public class Hero extends Primary {
             equipedArrow = false,
             hasGold = false,
             life = true;
+    
+    private Gold gold;
 
     private String name;
     private int score = 0;
@@ -62,9 +64,12 @@ public class Hero extends Primary {
 
     } 
 
-    public void collect(){
-       if (this.world.hasGold(i, j))
+    public void collect(Gold gold){
+       if (this.world.hasGold(i, j)){
+           this.gold = gold;
            this.hasGold = true;
+           this.world.rmComp(gold, i, j);
+       }
     }
 
     public void shoot(){
@@ -100,8 +105,13 @@ public class Hero extends Primary {
         return false;
     }
 
+    public int getScore(){
+        return this.score;
+    }
+
     public void updateCave(){
-        this.world.displayCave(this.name, this.score, this.gameStatus(), this.life);
+        boolean gs = this.gameStatus();
+        this.world.displayCave(this.name, this.score, gs, this.life);
     }
 
 }

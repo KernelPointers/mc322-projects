@@ -1,9 +1,12 @@
 package pt.c40task.l05wumpus;
 import java.util.Scanner;
 
+
 public class Control {
     private String moves;
     private Hero player;
+    private Gold gold;
+    private char status = 'P';
 
 
     public Control(String moves){
@@ -12,6 +15,10 @@ public class Control {
 
     public void connect(Hero player){
         this.player = player;
+    }
+
+    public void connectGold(Gold gold){
+        this.gold = gold;
     }
     
 
@@ -24,6 +31,8 @@ public class Control {
 
     public void moveFile() {
         player.setName();
+        System.out.println("=== Caverna");
+        player.updateCave();
         int len = this.moves.length();
         for (int i = 0; i < len && this.player.isAlive(); i++){
             char cmd = this.moves.charAt(i);
@@ -32,8 +41,8 @@ public class Control {
                 case 's' :  moveDown(); break;
                 case 'd' :  moveRight(); break;
                 case 'a' :  moveLeft(); break;
-                case 'k' :  this.player.equip(); break;
-                case 'c' :  this.player.collect(); break;
+                case 'k' :  this.player.equip(); break; // n eh impresso no terminal
+                case 'c' :  collectGold(); break; // printar na tela
                 case 'q' :  quit(); break;
 
             }
@@ -49,17 +58,22 @@ public class Control {
         String name = scanner.nextLine();
         this.player.setName(name);
 
-        scanner.close();
 
     }
 
     public void moveUser(){
         this.setPlayerName();
+        
+        System.out.println("=== Caverna");
+        player.updateCave();// separar writeboard()
+
         Scanner scanner = new Scanner(System.in);
+
         String cmd;
 
         while(this.player.isAlive()){
-            cmd = scanner.nextLine();       
+            System.out.print("move: ");
+            cmd = scanner.nextLine();                   
             char cmd_char = cmd.charAt(0);
             switch (cmd_char) {
                 case 'w' :  moveUp(); break;
@@ -67,13 +81,14 @@ public class Control {
                 case 'd' :  moveRight(); break;
                 case 'a' :  moveLeft(); break;
                 case 'k' :  this.player.equip(); break;
-                case 'c' :  this.player.collect(); break;
+                case 'c' :  collectGold(); break;
                 case 'q' :  quit(); break;
                 default : System.out.println("Error: command not found");
             }
-
+            
         }
         scanner.close();
+        
     }
     
 
@@ -106,8 +121,25 @@ public class Control {
         this.player.updateCave();
         System.out.println("Volte sempre !");
         player.setLife(false);
-        
-        // finalizar       
     }
     
+    public void collectGold(){
+       this.player.collect(this.gold);
+    }
+
+    public int getPlayerScore(){
+        return this.player.getScore();
+    }
+
+    public void changeStatus(){
+        if (!this.player.isAlive())
+            this.status = 'L';
+        else if (this.player.gameStatus())
+            this.status = 'W';
+
+    }
+
+    public char getStatus(){
+        return this.status;
+    }
 }

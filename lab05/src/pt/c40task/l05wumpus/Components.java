@@ -1,6 +1,6 @@
 package pt.c40task.l05wumpus;
 
-public abstract class Components {
+public class Components {
     protected int i, j;
     protected Cave world;
     protected char id;

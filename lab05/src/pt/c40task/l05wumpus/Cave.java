@@ -70,9 +70,9 @@ public class Cave {
 
     public boolean hasGold(int i, int j){
         Room room = this.map[i][j];
-        int len = room.items.size();
+        int len = room.sizeOfItems();
         for (int k = 0; k < len; k++){
-            if (room.items.get(k).id == 'O')
+            if (room.getItemId(k) == 'O')
                 return true;
         }
         return false;
@@ -83,12 +83,7 @@ public class Cave {
         this.addComp(player, x, y);
         // verificar se ha inimigo
         this.rmComp(player, i, j);
-        this.updateCave(i, j);
 
-   }
-
-   public void updateCave(int i, int j){
-        
    }
 
     public void displayCave(String name, int score, boolean win, boolean life){
@@ -104,11 +99,17 @@ public class Cave {
         System.out.println("Player: " + name);
         System.out.println("Score: " + score);
         
+        
         if (!life)
             System.out.println("Voce perdeu =( ...");
         else if (win)
             System.out.println("Voce ganhou =D !!!");
         
+        System.out.println();
+    }
+
+    public char getRoomChar(int i, int j){
+        return this.map[i][j].getStatusID();
     }
 
 }

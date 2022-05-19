@@ -2,7 +2,7 @@ package pt.c40task.l05wumpus;
 import java.util.ArrayList;
 
 public class Room {
-    ArrayList<Components> items = new ArrayList<Components>();
+    private ArrayList<Components> items = new ArrayList<Components>();
     private char statusID = '-';
     private boolean hasPlayerBeen = false;
 
@@ -32,41 +32,50 @@ public class Room {
     public void setPriority(){
         char item;
         int len = items.size();
-        
+
         if (len == 0){
             if (!this.hasPlayerBeen)
                 this.statusID = '-';
-            else 
+            else
                 this.statusID = '#';
 
             return;
         }
 
         if (this.hasPlayerBeen){
-            char max = items.get(0).id;
+            char max = '#';
             for (int i = 0; i < len; i++){
-
                 item = items.get(i).id;
-                if (item == 'W' || item == 'O' || item == 'B'){
+                if (comp(max,  item))
                     max = item;
-
-                } else if (item == 'P'){
-                    if (max != 'W' || max != 'O' || max != 'B')
-                        max = item;
-
-                } else if (item == 'f'){
-                    if (max != 'W' || max != 'O' || max != 'B' || max != 'P')
-                        max = item;
-
-                } else if (item == 'b'){
-                    if (max != 'W' || max != 'O' || max != 'B' || max != 'P' || max != 'f')
-                        max = item;
-                }
             }
             this.statusID = max;
-        }
-        this.statusID = '-'; 
+            return;
 
+        }
+        this.statusID = '-';
+
+    }
+
+    public boolean comp(char a, char b){
+        if (b == 'W' || b == 'O' || b =='B')
+            return true;
+        if (b == 'P' && (a == 'W'  || a == 'O' ||  a == 'B'))
+            return false;
+        else if (b == 'P')
+            return true;
+        else if (b == 'f' && a == 'P')
+            return false;
+        else if (b == 'f')
+            return true;
+        else if (b == 'b' && a == 'f')
+            return false;
+        else if (b == 'b')
+            return true;
+        else if (b == '#')
+            return false;
+        else 
+            return false;
     }
     
     public boolean hasWumpus(){
@@ -86,8 +95,10 @@ public class Room {
         int len = this.items.size();
 
         for (int i = 0; i < len; i++)
-            if (items.get(i).id == 'W')
-                rmItem(items.get(i));
+            if (items.get(i).id == 'W'){
+                this.rmItem(items.get(i));
+                return;
+            }
     }
 
     public void delPlayer(){
@@ -99,4 +110,11 @@ public class Room {
 
     }
 
+    public int sizeOfItems(){
+        return this.items.size();
+    }
+
+    public char getItemId(int k){
+        return this.items.get(k).id; 
+    }
 }

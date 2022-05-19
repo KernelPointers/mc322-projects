@@ -34,6 +34,7 @@ public class Maker {
                     else if (room.equals("O")){
                         Gold g = new Gold(linha, coluna, 'O');
                         g.connect(world);
+                        ctrl.connectGold(g);
                     } 
                 }                
             }

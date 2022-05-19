@@ -74,17 +74,20 @@ public class Toolkit {
       return v;
    }
    
-   public void writeBoard(char board[][], int score, char status){
+   public void writeBoard(Cave world, Control ctrl){
       try {
          if (!firstBoard)
             outputStr.println("=====");
-         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++)
-               outputStr.print(board[i][j]);
+         int dim = world.getNum();
+         for (int i = 0; i < dim; i++) {
+            for (int j = 0; j < dim; j++)
+               outputStr.print(world.getRoomChar(i, j));
             outputStr.println();
          }
-         outputStr.println("score: " + score);
-         outputStr.println("status: " + status);
+         outputStr.println("score: " + ctrl.getPlayerScore()); 
+         ctrl.changeStatus();
+         outputStr.println("status: " + ctrl.getStatus());
+        
          firstBoard = false;
       } catch(Exception erro){
          erro.printStackTrace();
