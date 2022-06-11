@@ -5,58 +5,135 @@ P---
 score: 0
 status: P
 =====
-#P--
-----
+#---
+P---
 ----
 ----
 score: -15
 status: P
 =====
-##P-
-----
-----
+#---
+#---
+P---
 ----
 score: -30
 status: P
 =====
-##b-
---P-
-----
-----
-score: -145
+#---
+#---
+b---
+P---
+score: -45
 status: P
 =====
-##b-
---P-
-----
-----
-score: -145
+#---
+#---
+b---
+#P--
+score: -60
+status: P
+=====
+#---
+#---
+b---
+#bO-
+score: -75
+status: P
+=====
+#---
+#---
+b---
+#bP-
+score: -75
+status: P
+=====
+#---
+#---
+b---
+#bfP
+score: -90
+status: P
+=====
+#---
+#---
+b--P
+#bf#
+score: -105
+status: P
+=====
+#---
+#---
+b--f
+#bfP
+score: -120
+status: P
+=====
+#---
+#---
+b--P
+#bf#
+score: -135
+status: P
+=====
+#---
+#---
+b-Pf
+#bf#
+score: 250
+status: P
+=====
+#---
+#---
+b-bP
+#bf#
+score: 235
+status: P
+=====
+#---
+#--P
+b-bf
+#bf#
+score: 220
+status: P
+=====
+#---
+#-Pb
+b-bf
+#bf#
+score: 205
+status: P
+=====
+#---
+#Pfb
+b-bf
+#bf#
+score: 190
+status: P
+=====
+#P--
+#bfb
+b-bf
+#bf#
+score: 175
 status: P
 =====
 ##P-
---f-
-----
-----
-score: -160
+#bfb
+b-bf
+#bf#
+score: 160
 status: P
 =====
 #Pb-
---f-
-----
-----
-score: -175
+#bfb
+b-bf
+#bf#
+score: 145
 status: P
 =====
 P#b-
---f-
-----
-----
-score: -190
-status: P
-=====
-P#b-
---f-
-----
-----
-score: -190
-status: P
+#bfb
+b-bf
+#bf#
+score: 1130
+status: W
