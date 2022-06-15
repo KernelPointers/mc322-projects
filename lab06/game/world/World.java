@@ -5,9 +5,15 @@ import java.util.ArrayList;
 public class World implements WorldInterface{
     private  ArrayList<Node> rooms = new ArrayList<Node>();
 
+    private static final World instance = new World();
+
+    public static World getInstance(){
+        return instance;
+        
+    }
+
     public void build(int position, String normalBuild, String invBuild){
-        Room normal = new Room(); 
-        Room inv = new Room();
+        Room normal = new Room(position), inv = new Room(position);
 
         normal.build(normalBuild);
         inv.build(invBuild);

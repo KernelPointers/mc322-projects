@@ -1,7 +1,7 @@
 package game.builder;
 
 public interface BuilderInterface 
-    extends ReqIntBody, ReqIntWorld{
+    extends ReqIntWorld{
 
     public void buildWorld();
 }

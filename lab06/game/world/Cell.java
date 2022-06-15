@@ -11,4 +11,16 @@ public class Cell {
         this.id = this.body.getId();
     }
 
+    public char getId(){
+        return this.id;
+    }
+
+    public void setActor(BodyInterface actor){
+        this.body = actor;
+    }
+
+    public void clearActor(BodyInterface empty){        
+        this.body = empty;
+        this.id = '#';
+    }
 }

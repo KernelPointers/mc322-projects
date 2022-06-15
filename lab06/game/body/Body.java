@@ -1,8 +1,13 @@
 package game.body;
 
 public abstract class Body implements BodyInterface{
-    private char id;
-    
+    protected char id;
+    protected int i, j;
+   
+    public Body(char id){
+        this.id = id;
+    }
+
     public char getId(){
         return this.id;
     }

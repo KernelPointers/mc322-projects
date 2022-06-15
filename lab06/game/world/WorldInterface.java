@@ -1,6 +1,5 @@
 package game.world;
 
-public interface WorldInterface 
-    extends IntWorld {
+public interface WorldInterface {
         public void build(int position, String nomralBuild, String invBuild);
 }

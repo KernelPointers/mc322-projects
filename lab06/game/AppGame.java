@@ -1,7 +1,6 @@
 package game;
 
 import game.builder.*;
-import game.body.*;
 import game.world.*;
 
 public class AppGame {
@@ -13,7 +12,7 @@ public class AppGame {
        WorldInterface world = wFactory.create('w');
 
        builder.connect(world);
-
+       
        builder.buildWorld();
 
     }

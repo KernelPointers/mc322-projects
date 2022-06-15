@@ -1,23 +1,17 @@
 package game.builder;
 
-import game.body.*;
 import game.world.*;
 
 public class Builder implements BuilderInterface{
-        private BodyInterface body;
         private WorldInterface world;
         private int layoutNum = 1;
     
-        public void connect(BodyInterface body){
-            this.body = body;
-        }
-
         public void connect(WorldInterface world){
             this.world = world;
         }
 
         public void buildWorld(){
-            CSVreader reader = new CSVreader();
+            tileReader reader = new tileReader();
             
             // usar controlador para fzr com q salas sejam instanciadas
             // apenas qnd o player entrar nelas
