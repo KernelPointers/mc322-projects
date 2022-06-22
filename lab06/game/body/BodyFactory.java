@@ -1,5 +1,7 @@
 package game.body;
 
+import game.body.ProvidedInterfaces.IntBodyFactory;
+
 public class BodyFactory implements IntBodyFactory{
    public BodyInterface create(char type){
         BodyInterface body = null;

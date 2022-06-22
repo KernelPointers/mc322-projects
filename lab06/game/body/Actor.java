@@ -1,12 +1,12 @@
 package game.body;
 
-import game.world.Room;
+import game.world.ProvidedInterfaces.IActorMovement;
 import game.body.RequiredInterfaces.ReqIRoom;
 
 public abstract class Actor extends Body implements ReqIRoom{
-    private Room room;
+    private IActorMovement room;
 
-    public void connect(Room room){
+    public void connect(IActorMovement room){
         this.room = room;
     }
 

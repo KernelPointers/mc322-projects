@@ -1,0 +1,16 @@
+package game.controller;
+
+import game.controller.ProvidedInterfaces.ControllerInterface;
+import game.controller.ProvidedInterfaces.IntControllerFactory;
+
+public class ControllerFactory implements IntControllerFactory{
+
+    @Override
+    public ControllerInterface create(char type) {
+        ControllerInterface ctrl = null;
+        if (type == 'c')
+            ctrl = new GameControl();
+        return ctrl;
+    }
+
+}

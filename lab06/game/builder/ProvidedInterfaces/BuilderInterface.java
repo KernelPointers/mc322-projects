@@ -1,4 +1,6 @@
-package game.builder;
+package game.builder.ProvidedInterfaces;
+
+import game.builder.RequiredInterfaces.ReqIntWorld;
 
 public interface BuilderInterface 
     extends ReqIntWorld{

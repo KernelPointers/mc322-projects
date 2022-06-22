@@ -1,7 +1,7 @@
 package game.body.RequiredInterfaces;
 
-import game.world.Room;
+import game.world.ProvidedInterfaces.IActorMovement;
 
 public interface ReqIRoom {
-   public void connect(Room room); 
+   public void connect(IActorMovement room); 
 }

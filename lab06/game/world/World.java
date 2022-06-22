@@ -2,6 +2,8 @@ package game.world;
 
 import java.util.ArrayList;
 
+import game.world.ProvidedInterfaces.WorldInterface;
+
 public class World implements WorldInterface{
     private  ArrayList<Node> rooms = new ArrayList<Node>();
 
@@ -23,8 +25,5 @@ public class World implements WorldInterface{
         this.rooms.add(node);
         
     }    
-
-
-
 }
 

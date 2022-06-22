@@ -1,6 +1,8 @@
 package game.world;
 
 import game.body.*;
+import game.body.ProvidedInterfaces.IntBodyFactory;
+import game.world.ProvidedInterfaces.IActorMovement;
 import game.AbstractFactory;
 
 public class Room implements IActorMovement{

@@ -1,6 +1,7 @@
 package game.builder;
 
-import game.world.*;
+import game.builder.ProvidedInterfaces.BuilderInterface;
+import game.world.ProvidedInterfaces.WorldInterface;
 
 public class Builder implements BuilderInterface{
         private WorldInterface world;
@@ -11,7 +12,7 @@ public class Builder implements BuilderInterface{
         }
 
         public void buildWorld(){
-            tileReader reader = new tileReader();
+            TileReader reader = new TileReader();
             
             // usar controlador para fzr com q salas sejam instanciadas
             // apenas qnd o player entrar nelas
@@ -23,5 +24,14 @@ public class Builder implements BuilderInterface{
                 world.build(i, buildCmdNormal, buildCmdInv);
             }
 
+        }
+
+        public void buildController(){
+            
+        }
+
+        public void buildGame(){
+            this.buildController();
+            this.buildGame();
         }
 }
