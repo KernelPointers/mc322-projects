@@ -1,13 +1,13 @@
 package game;
 
-import game.GraphicView.ViewFactory;
-import game.GraphicView.ProvidedInterfaces.IntGraphicFactory;
 import game.body.BodyFactory;
 import game.body.ProvidedInterfaces.IntBodyFactory;
 import game.builder.BuilderFactory;
 import game.builder.ProvidedInterfaces.IntBuilderFactory;
 import game.controller.ControllerFactory;
 import game.controller.ProvidedInterfaces.IntControllerFactory;
+import game.graphicView.ViewFactory;
+import game.graphicView.ProvidedInterfaces.IntGraphicFactory;
 import game.world.WorldFactory;
 import game.world.ProvidedInterfaces.IntWorldFactory;
 

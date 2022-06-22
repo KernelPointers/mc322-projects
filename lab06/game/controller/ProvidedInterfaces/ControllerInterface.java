@@ -1,6 +1,6 @@
 package game.controller.ProvidedInterfaces;
 
-import game.GraphicView.ProvidedInterfaces.IWindow;
+import game.graphicView.ProvidedInterfaces.IWindow;
 
 public interface ControllerInterface{
     public void run();

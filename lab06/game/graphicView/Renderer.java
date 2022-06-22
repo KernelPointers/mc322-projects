@@ -1,4 +1,4 @@
-package game.GraphicView;
+package game.graphicView;
 
 public class Renderer {
     

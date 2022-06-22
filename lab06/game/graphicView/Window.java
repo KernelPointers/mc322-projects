@@ -1,12 +1,12 @@
-package game.GraphicView;
+package game.graphicView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 import game.AppGame;
-import game.GraphicView.ProvidedInterfaces.IWindow;
-import game.GraphicView.ProvidedInterfaces.ViewInterface;
+import game.graphicView.ProvidedInterfaces.IWindow;
+import game.graphicView.ProvidedInterfaces.ViewInterface;
 
 public class Window extends Canvas implements IWindow, ViewInterface{
 
@@ -30,21 +30,21 @@ public class Window extends Canvas implements IWindow, ViewInterface{
         frame.setVisible(true);
         // game.start();
 
+        //this.addKeyListener(keyInput);
 
     }
 
     public void render(Graphics g){
-        this.setTileGrid(g, 1920, 1080, 32, 32);
+        this.setTileGrid(g, 1920, 1080, 80, 72);
     }
 
     public void tick(double dt){
-
+        
     }
 
     public void paint(Graphics g, int x, int y) {  
   
         Toolkit t = Toolkit.getDefaultToolkit();  
-        String home = System.getProperty("dir");
         Image cellTile = t.getImage("assets/box_temp.jpg");  
         g.drawImage(cellTile, x, y, this);  
           

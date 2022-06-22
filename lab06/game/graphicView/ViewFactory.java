@@ -1,7 +1,7 @@
-package game.GraphicView;
+package game.graphicView;
 
-import game.GraphicView.ProvidedInterfaces.IntGraphicFactory;
-import game.GraphicView.ProvidedInterfaces.ViewInterface;
+import game.graphicView.ProvidedInterfaces.IntGraphicFactory;
+import game.graphicView.ProvidedInterfaces.ViewInterface;
 
 public class ViewFactory implements IntGraphicFactory {
 
@@ -10,7 +10,8 @@ public class ViewFactory implements IntGraphicFactory {
         ViewInterface view = null;
             if (type == 'v')
                 view = new Window(1920, 1080, "game"); // VERIFICAR PARAMETROS DO CONSTRUTOR
-
+            if (type == 'r')
+                view = new ViewRoom(15, 25);
             return view;
     }
 

@@ -26,12 +26,22 @@ public class Builder implements BuilderInterface{
 
         }
 
-        public void buildController(){
+        public void buildViewRoom(int levelIndex){
+
             
+
+            //criar viewroom
+            //attach na sala de indice i
+            // build
+
         }
 
-        public void buildGame(){
-            this.buildController();
-            this.buildGame();
-        }
+       // public void buildController(){
+            
+       // }
+
+        //public void buildGame(){
+        //    this.buildController();
+        //    this.buildGame();
+        //}
 }

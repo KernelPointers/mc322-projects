@@ -1,4 +1,4 @@
-package game.GraphicView.ProvidedInterfaces;
+package game.graphicView.ProvidedInterfaces;
 
 import java.awt.Graphics;
 

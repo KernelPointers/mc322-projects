@@ -1,20 +1,13 @@
 package game;
 
-import game.world.ProvidedInterfaces.IntWorldFactory;
-import game.world.ProvidedInterfaces.WorldInterface;
-import game.GraphicView.Window;
-import game.GraphicView.ProvidedInterfaces.IntGraphicFactory;
-import game.GraphicView.ProvidedInterfaces.ViewInterface;
-import game.builder.ProvidedInterfaces.BuilderInterface;
-import game.builder.ProvidedInterfaces.IntBuilderFactory;
-import game.controller.ProvidedInterfaces.ControllerInterface;
-import game.controller.ProvidedInterfaces.IntControllerFactory;
+import game.world.ProvidedInterfaces.*;
+import game.builder.ProvidedInterfaces.*;
+import game.controller.ProvidedInterfaces.*;
+import game.graphicView.ProvidedInterfaces.*;
 
 import java.awt.Canvas;
 
 public class AppGame extends Canvas{
-    private static final int WIDTH = 1280, HEIGHT = WIDTH / 16 * 9;
-
     private static final long serialVersionUID = 1L;
     public static void main(String args[]){
        IntBuilderFactory bFactory = AbstractFactory.createBuilderFactory();

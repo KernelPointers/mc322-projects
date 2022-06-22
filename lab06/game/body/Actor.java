@@ -14,7 +14,7 @@ public abstract class Actor extends Body implements ReqIRoom{
         super(id);
     }
 
-    public void Move(char dir){
+    public void move(char dir){
         if (dir == 'r') // right
             this.moveRight();
         else if (dir == 'l') // left

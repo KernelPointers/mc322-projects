@@ -1,6 +1,6 @@
 package game.controller.RequiredInterfaces;
 
-import game.GraphicView.ProvidedInterfaces.IWindow;
+import game.graphicView.ProvidedInterfaces.IWindow;
 
 public interface RIWindow {
     public void connect(IWindow window);
