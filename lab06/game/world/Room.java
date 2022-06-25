@@ -68,19 +68,15 @@ public class Room implements IRoom, Subject{
     }
 
     public void invertTargetRoom(){
-      int num = this.subscribers.size();
-      int i = 0;
-      while(i < num && num != 0){
-        IntViewRoom obs = this.subscribers.get(i);
+      
+      IntViewRoom obs = this.subscribers.get(0);
         obs.toogleRoomStatus();
+        obs.setSubject(this.invertedRoom);
         obs.build();
         this.detach(obs);
         this.invertedRoom.attach(obs);
-        i++;
-        num = this.subscribers.size();
       }
-      
-    }
+    
 
     public void notifyObserver(int i, int j, BufferedImage img, char id){
       for (IntViewRoom obs : this.subscribers) 

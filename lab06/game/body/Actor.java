@@ -60,12 +60,12 @@ public abstract class Actor extends Body {
     public void invert(){
         IRoom invRoom = room.getInverse();
         if (invRoom.canMove(this.i, this.j)){
+            if (this.id == 'p'){
+                this.room.invertTargetRoom();
+             }
             invRoom.setActor(this, this.i, this.j);
             room.clearActor(i, j);
 
-            if (this.id == 'p'){
-            //    this.room.invertTargetRoom();
-            }
 
             this.room = invRoom;
 
