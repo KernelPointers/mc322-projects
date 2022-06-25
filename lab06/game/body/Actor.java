@@ -64,7 +64,7 @@ public abstract class Actor extends Body {
             room.clearActor(i, j);
 
             if (this.id == 'p'){
-                this.room.invertTargetRoom();
+            //    this.room.invertTargetRoom();
             }
 
             this.room = invRoom;

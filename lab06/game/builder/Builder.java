@@ -1,7 +1,6 @@
 package game.builder;
 
 import game.builder.ProvidedInterfaces.BuilderInterface;
-import game.controller.ProvidedInterfaces.IKeyboard;
 import game.graphicView.IntViewRoom;
 import game.world.WorldInterface;
 

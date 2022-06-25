@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 import game.controller.ProvidedInterfaces.IKeyboard;
 import game.graphicView.IntViewRoom;
-import game.world.ReqInterfaces.RIKeyboard;
 
-public class World implements WorldInterface, RIKeyboard{
+public class World implements WorldInterface{
     private  ArrayList<Node> rooms = new ArrayList<Node>();
 
     private IKeyboard keyInput;

@@ -1,6 +1,5 @@
 package game.controller;
 
-import java.awt.event.KeyListener;
 
 import game.controller.ProvidedInterfaces.ControllerInterface;
 import game.controller.ProvidedInterfaces.IKeyboard;

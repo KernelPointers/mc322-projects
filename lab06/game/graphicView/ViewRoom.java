@@ -1,6 +1,5 @@
 package game.graphicView;
 
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import game.world.Subject;

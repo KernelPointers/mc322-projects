@@ -5,10 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import java.awt.event.KeyListener;
 import java.io.File;
 
-import game.AppGame;
 import game.controller.ProvidedInterfaces.IKeyboard;
 import game.graphicView.ProvidedInterfaces.IWindow;
 import game.graphicView.RequiredInterfaces.RIKeyboardInput;
