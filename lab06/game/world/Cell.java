@@ -20,8 +20,12 @@ public class Cell {
         return this.id;
     }
 
-    public BufferedImage getImg(){
+    public BufferedImage[] getImg(){
         return this.body.getImg();
+    }
+
+    public BodyInterface getBody(){
+        return this.body;
     }
 
     public void setActor(BodyInterface actor){
@@ -32,5 +36,9 @@ public class Cell {
     public void clearActor(BodyInterface empty){        
         this.body = empty;
         this.id = '#';
+    }
+
+    public boolean isTangible(){
+        return this.body.isTangible();
     }
 }

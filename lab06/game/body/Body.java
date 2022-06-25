@@ -1,6 +1,9 @@
 package game.body;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 
 import game.body.RequiredInterfaces.RIRoom;
 import game.world.ProvidedInterfaces.IRoom;
@@ -8,7 +11,8 @@ import game.world.ProvidedInterfaces.IRoom;
 public abstract class Body implements BodyInterface, RIRoom{
     protected char id;
     protected int i, j;
-    protected BufferedImage img;
+    protected boolean isTangible = true;
+    protected BufferedImage img[];
     protected IRoom room;
    
     public Body(char id, int i, int j){
@@ -21,12 +25,29 @@ public abstract class Body implements BodyInterface, RIRoom{
         this.room = room;
     }
 
+    public boolean isTangible(){
+        return this.isTangible;
+    }
+
     public char getId(){
         return this.id;
     }
 
-    public BufferedImage getImg(){
+
+    public BufferedImage[] getImg(){
         return this.img;
+    }
+
+    public void readImg(String dir, int num){
+        this.img = new BufferedImage[num];
+        for (int k = 0; k < num; k++){
+           String sprite_name = dir + k + ".png"; 
+           try {
+                this.img[k] = ImageIO.read(new File(sprite_name));
+           } catch (Exception err){
+
+           }
+        }
     }
 
     public int getI(){

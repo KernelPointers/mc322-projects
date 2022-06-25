@@ -5,4 +5,5 @@ import game.world.ProvidedInterfaces.IRoom;
 
 public interface BodyInterface extends IntBodyProperties {
     public void connect(IRoom room);
+    public boolean isTangible();
 }

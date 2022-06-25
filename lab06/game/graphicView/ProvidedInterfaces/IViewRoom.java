@@ -13,7 +13,7 @@ public interface IViewRoom {
 
     public int getJnum();
 
-    public BufferedImage getImg(int i, int j);
+    public BufferedImage[] getImg(int i, int j);
 
     public void setLevelIndex(int levelIndex);
     

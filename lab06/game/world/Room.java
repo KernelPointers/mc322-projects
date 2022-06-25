@@ -18,6 +18,7 @@ public class Room implements IRoom, Subject{
     private Cell[][] cells = new Cell[iNum][jNum];
     private ArrayList<IntViewRoom> subscribers = new ArrayList<IntViewRoom>();
     private Room invertedRoom;
+    private World world = World.getInstance();
 
     public Room(int levelNumber){
       this.levelNumber = levelNumber;
@@ -67,18 +68,17 @@ public class Room implements IRoom, Subject{
       this.subscribers.remove(obs);
     }
 
-    public void invertTargetRoom(){
-      
-      IntViewRoom obs = this.subscribers.get(0);
+    public void changeTargetRoom(Room room){
+        IntViewRoom obs = this.subscribers.get(0);
         obs.toogleRoomStatus();
-        obs.setSubject(this.invertedRoom);
+        obs.setSubject(room);
         obs.build();
         this.detach(obs);
-        this.invertedRoom.attach(obs);
+        room.attach(obs);
       }
     
 
-    public void notifyObserver(int i, int j, BufferedImage img, char id){
+    public void notifyObserver(int i, int j, BufferedImage[] img, char id){
       for (IntViewRoom obs : this.subscribers) 
         obs.update(i, j, img, id);
     }
@@ -96,7 +96,7 @@ public class Room implements IRoom, Subject{
     } 
 
     public boolean hasCollision(int i, int j){
-      if (cells[i][j].getId() == '#')
+      if (!cells[i][j].isTangible())
         return false;
       return true; 
 
@@ -118,8 +118,14 @@ public class Room implements IRoom, Subject{
         return this.cells[i][j].getId();
     }
 
+    public boolean hasDoor(int i, int j){
+      if (this.getId(i, j) == 'd')
+        return true;
+      return false;
+    }
+
     @Override
-    public BufferedImage getImg(int i, int j) {
+    public BufferedImage[] getImg(int i, int j) {
       return this.cells[i][j].getImg();
     }
 
@@ -130,5 +136,13 @@ public class Room implements IRoom, Subject{
     @Override
     public Room getInverse() {
       return this.invertedRoom;
+    }
+
+    public Room getNextRoom(){
+      return this.world.getRoom(this.levelNumber + 1, true);
+    }
+
+    public Room getLastRoom(){
+      return this.world.getRoom(this.levelNumber - 1, true);
     }
 }

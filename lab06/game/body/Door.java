@@ -1,16 +1,21 @@
 package game.body;
 
-import java.io.File;
-
-import javax.imageio.ImageIO;
-
 public class Door extends Rigid{
+    public boolean isLocked = true;
+
     public Door(char id, int i, int j){
         super(id, i, j);
-        try{
-            this.img = ImageIO.read(new File("assets/door_temp.jpg"));
-        } catch (Exception error){
-
-        }
+        this.readImg("assets/door/", 1);
+        
+        this.isTangible = false;
     }
+
+    public boolean isLocked(){
+        return this.isLocked;
+    }
+
+    public void unlock(){
+        this.isLocked = false;
+        this.isTangible = false;
+    }    
 }

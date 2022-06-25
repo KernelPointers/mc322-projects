@@ -27,7 +27,7 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
 
             this.window.setGraphics();
 
-            System.out.println(1 / dt);
+            //System.out.println(1 / dt);
 
             //window.setGraphics();
             //while (dt >= 1){

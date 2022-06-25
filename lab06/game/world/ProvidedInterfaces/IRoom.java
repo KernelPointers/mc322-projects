@@ -12,5 +12,11 @@ public interface IRoom {
 
     public Room getInverse();
 
-    public void invertTargetRoom();
+    public void changeTargetRoom(Room newTarget);
+
+    public Room getNextRoom();
+
+    public Room getLastRoom();
+
+    public boolean hasDoor(int i, int j);
 }

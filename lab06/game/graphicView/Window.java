@@ -68,34 +68,42 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
         
     }
 
-    public void paintComponent(Graphics g, int x, int y, BufferedImage img) {  
-  
-            g.drawImage(img, x, y, this);
+    public void paintComponent(Graphics g, int x, int y, BufferedImage[] img) {  
+        if (!(img == null))
+            for (int i = 0; i < img.length; i++){
+                //int dist = i + z;
+                //float lx = dist * angCos
+                //float ly = dist * angSin
+                g.drawImage(img[i], x , y , this);
+                //this.getBufferStrategy().show();
+            }
+
 
     }  
 
     public void setTileGrid(Graphics g, int width, int height, int tileWidth, int tileHeight){
         double xNUm = width / tileWidth;
         double yNUm = height / tileHeight;
+        int num = 16;
+        BufferedImage[] img = new BufferedImage[num];
+            for (int i = 0; i < num; i++){
+            String sprite_name = "assets/stacked_dirt_floor/" + i + ".png"; 
+            try {
+                img[i] = ImageIO.read(new File(sprite_name));
+            } catch (Exception err){
 
-        try {
-            BufferedImage cellTile = ImageIO.read(new File("assets/cell_temp_i.jpg"));  
-
-            //xNUm = Math.floor(xNUm);
-            //yNUm = Math.floor(yNUm);
-
+           }
+            }
+        
             for (int i = 0; i < yNUm; i++){
                 int yGap = tileHeight * i;
                 for (int j = 0; j < xNUm; j++){
                     int xGap = tileWidth * j;
-                    paintComponent(g, xGap, yGap, cellTile); 
+                    paintComponent(g, xGap, yGap, img); 
+                }
             }
-        }
 
-         
-        }catch (Exception error){
-            System.err.println("Empty image file for cellTile");
-        }
+      
 
     }
 

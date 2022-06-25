@@ -31,7 +31,7 @@ public class ViewRoom implements IntViewRoom{
         return this.jNum;
     }
 
-    public BufferedImage getImg(int i, int j){
+    public BufferedImage[] getImg(int i, int j){
         return this.viewCells[i][j].getImg();
     }
 
@@ -52,7 +52,7 @@ public class ViewRoom implements IntViewRoom{
     }
 
     @Override
-    public void update(int i, int j, BufferedImage sprite, char id){
+    public void update(int i, int j, BufferedImage[] sprite, char id){
         this.viewCells[i][j].setImg(sprite, id);
     }
 
