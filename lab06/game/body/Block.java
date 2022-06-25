@@ -1,7 +1,7 @@
 package game.body;
 
 public class Block extends Actor{
-     public Block(char id){
-        super(id);
+     public Block(char id, int i, int j){
+        super(id, i, j);
     } 
 }

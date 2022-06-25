@@ -2,12 +2,16 @@ package game;
 
 import game.body.BodyFactory;
 import game.body.ProvidedInterfaces.IntBodyFactory;
+
 import game.builder.BuilderFactory;
 import game.builder.ProvidedInterfaces.IntBuilderFactory;
+
 import game.controller.ControllerFactory;
 import game.controller.ProvidedInterfaces.IntControllerFactory;
+
 import game.graphicView.ViewFactory;
-import game.graphicView.ProvidedInterfaces.IntGraphicFactory;
+import game.graphicView.ProvidedInterfaces.IgraphicViewFactory;
+
 import game.world.WorldFactory;
 import game.world.ProvidedInterfaces.IntWorldFactory;
 
@@ -37,8 +41,8 @@ public class AbstractFactory {
         return factory;
     }
 
-    public static IntGraphicFactory createViewFactory(){
-        IntGraphicFactory factory = null;
+    public static IgraphicViewFactory createViewFactory(){
+        IgraphicViewFactory factory = null;
         factory = new ViewFactory();
         return factory;
     }

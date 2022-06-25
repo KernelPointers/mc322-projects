@@ -1,19 +1,22 @@
 package game.graphicView;
 
-import game.graphicView.ProvidedInterfaces.IntGraphicFactory;
-import game.graphicView.ProvidedInterfaces.ViewInterface;
+import game.graphicView.ProvidedInterfaces.IWindow;
+import game.graphicView.ProvidedInterfaces.IgraphicViewFactory;
 
-public class ViewFactory implements IntGraphicFactory {
+public class ViewFactory implements IgraphicViewFactory {
 
     @Override
-    public ViewInterface create(char type) {
-        ViewInterface view = null;
-            if (type == 'v')
-                view = new Window(1920, 1080, "game"); // VERIFICAR PARAMETROS DO CONSTRUTOR
-            if (type == 'r')
-                view = new ViewRoom(15, 25);
-            return view;
+    public IntViewRoom createViewRoom(int iNum, int jNum, int levelIndex) {
+        IntViewRoom viewRoom = new ViewRoom();
+        viewRoom.setInum(iNum);
+        viewRoom.setJnum(jNum);
+        viewRoom.setLevelIndex(levelIndex);
+        return viewRoom;
     }
 
-    
+    @Override
+    public IWindow createWindow(int width, int height, String name) {
+        IWindow window = new Window(width, height, name);
+        return window;
+    } 
 }

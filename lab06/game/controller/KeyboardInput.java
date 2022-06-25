@@ -4,9 +4,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import game.body.ProvidedInterfaces.IPlayer;
+import game.controller.ProvidedInterfaces.IKeyboard;
 import game.controller.RequiredInterfaces.ReqIPlayer;
 
-public class KeyboardInput extends KeyAdapter implements ReqIPlayer{
+public class KeyboardInput extends KeyAdapter implements ReqIPlayer, IKeyboard{
     IPlayer player;
 
     public void keyPressed(KeyEvent event){
@@ -20,7 +21,8 @@ public class KeyboardInput extends KeyAdapter implements ReqIPlayer{
             player.move('l');
         else if (key == KeyEvent.VK_D)
             player.move('r');
-
+        else if (key == KeyEvent.VK_I)
+            player.invert();
         
     }
 

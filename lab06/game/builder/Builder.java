@@ -1,12 +1,16 @@
 package game.builder;
 
 import game.builder.ProvidedInterfaces.BuilderInterface;
-import game.world.ProvidedInterfaces.WorldInterface;
+import game.controller.ProvidedInterfaces.IKeyboard;
+import game.graphicView.IntViewRoom;
+import game.world.WorldInterface;
 
 public class Builder implements BuilderInterface{
         private WorldInterface world;
+        private IntViewRoom viewRoom;
         private int layoutNum = 1;
     
+        @Override
         public void connect(WorldInterface world){
             this.world = world;
         }
@@ -24,24 +28,22 @@ public class Builder implements BuilderInterface{
                 world.build(i, buildCmdNormal, buildCmdInv);
             }
 
+            this.buildViewRoom(0); // Podemos mudar qual sala eh mostrada
+                                              // no inicio
+
         }
 
+        @Override
         public void buildViewRoom(int levelIndex){
-
-            
-
-            //criar viewroom
-            //attach na sala de indice i
-            // build
-
+                this.world.attach(levelIndex, this.viewRoom, true);
+                this.viewRoom.setSubject(this.world.getRoom(levelIndex, true));
+                viewRoom.build();
         }
 
-       // public void buildController(){
-            
-       // }
+        @Override
+        public void connect(IntViewRoom viewRoom) {
+           this.viewRoom = viewRoom; 
+        }
 
-        //public void buildGame(){
-        //    this.buildController();
-        //    this.buildGame();
-        //}
+
 }

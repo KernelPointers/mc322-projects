@@ -1,17 +1,11 @@
 package game.body;
 
-import game.world.ProvidedInterfaces.IActorMovement;
-import game.body.RequiredInterfaces.ReqIRoom;
+import game.world.ProvidedInterfaces.IRoom;
 
-public abstract class Actor extends Body implements ReqIRoom{
-    private IActorMovement room;
+public abstract class Actor extends Body {
 
-    public void connect(IActorMovement room){
-        this.room = room;
-    }
-
-    public Actor(char id){
-        super(id);
+    public Actor(char id, int i, int j){
+        super(id, i, j);
     }
 
     public void move(char dir){
@@ -29,6 +23,7 @@ public abstract class Actor extends Body implements ReqIRoom{
         if (room.canMove(this.i, this.j - 1)){
             room.setActor(this, i, j - 1);
             room.clearActor(i, j);
+            this.j--;
         }
 
     }
@@ -37,7 +32,7 @@ public abstract class Actor extends Body implements ReqIRoom{
         if (room.canMove(this.i, this.j + 1)){
             room.setActor(this, i, j + 1);
             room.clearActor(i, j);
-
+            this.j++;
         }
 
     }
@@ -45,7 +40,9 @@ public abstract class Actor extends Body implements ReqIRoom{
     public void moveUp(){
         if (room.canMove(this.i - 1, this.j)){
             room.setActor(this, i - 1, j);
+
             room.clearActor(i, j);
+            this.i--;
 
         }
 
@@ -55,8 +52,25 @@ public abstract class Actor extends Body implements ReqIRoom{
         if (room.canMove(this.i + 1, this.j)){
             room.setActor(this, i + 1, j);
             room.clearActor(i, j);
-
+            this.i++;
         }
 
+    }
+
+    public void invert(){
+        IRoom invRoom = room.getInverse();
+        if (invRoom.canMove(this.i, this.j)){
+            invRoom.setActor(this, this.i, this.j);
+            room.clearActor(i, j);
+
+            if (this.id == 'p'){
+                this.room.invertTargetRoom();
+            }
+
+            this.room = invRoom;
+
+
+        }
+        // msg de aviso
     }
 }

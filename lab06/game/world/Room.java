@@ -1,26 +1,29 @@
 package game.world;
 
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 
 import game.body.*;
+import game.body.ProvidedInterfaces.IPlayer;
 import game.body.ProvidedInterfaces.IntBodyFactory;
-import game.world.ProvidedInterfaces.IActorMovement;
+import game.controller.ProvidedInterfaces.IKeyboard;
+import game.world.ProvidedInterfaces.IRoom;
 import game.AbstractFactory;
-import game.graphicView.Observer;
+import game.graphicView.IntViewRoom;
 
-public class Room implements IActorMovement, Subject{
+public class Room implements IRoom, Subject{
     private int iNum = 15, jNum = 24; // geral para casos onde jNum > iNum
     private int levelNumber;
-    private boolean isInverted;
+    private boolean isInverted = false;
     private Cell[][] cells = new Cell[iNum][jNum];
-
-    private ArrayList<Observer> subscribers;
+    private ArrayList<IntViewRoom> subscribers = new ArrayList<IntViewRoom>();
+    private Room invertedRoom;
 
     public Room(int levelNumber){
       this.levelNumber = levelNumber;
     }
 
-    public void build(String buildCmd){
+    public void build(String buildCmd, IKeyboard keyInput){
       int x = 0, y = -1; 
       for (int i = 0; i < iNum * jNum; i++){
 				x = (i % jNum);
@@ -30,28 +33,58 @@ public class Room implements IActorMovement, Subject{
 
 				char cellValue = buildCmd.charAt(i);
         IntBodyFactory bodyFact = AbstractFactory.createBodyFactory();
-        BodyInterface body = bodyFact.create(cellValue);
 
-        Cell c = new Cell(body);
-        cells[y][x] = c;
+        if (cellValue == 'p'){
+            IPlayer body = bodyFact.createPlayer(y, x);
+            body.connect(this);
+            this.setKeyInput(body , keyInput); 
+            Cell c = new Cell(body, y, x);
+            cells[y][x] = c;
+        } else{
+            BodyInterface body = bodyFact.create(cellValue, y, x);
+            body.connect(this);
+            Cell c = new Cell(body, y, x);
+            cells[y][x] = c;
+        }
 
-        // if (this.subs.size() != 0)
-        // this.notify();
-        // 
-			
+       
 		  }
     }
 
-    public void attach(Observer obs){
+    public void setInverse(Room invertedRoom){
+      this.invertedRoom = invertedRoom;
+    }
+
+    public void setInvertedStatus(){
+      this.isInverted = true;
+    }
+
+    public void attach(IntViewRoom obs){
       this.subscribers.add(obs);
     }
 
-    public void detach(Observer obs){
+    public void detach(IntViewRoom obs){
       this.subscribers.remove(obs);
     }
 
-    public void notifyObserver(){
-      for (Observer obs : this.subscribers) obs.update();
+    public void invertTargetRoom(){
+      int num = this.subscribers.size();
+      int i = 0;
+      while(i < num && num != 0){
+        IntViewRoom obs = this.subscribers.get(i);
+        obs.toogleRoomStatus();
+        obs.build();
+        this.detach(obs);
+        this.invertedRoom.attach(obs);
+        i++;
+        num = this.subscribers.size();
+      }
+      
+    }
+
+    public void notifyObserver(int i, int j, BufferedImage img, char id){
+      for (IntViewRoom obs : this.subscribers) 
+        obs.update(i, j, img, id);
     }
 
     public int getLevelNumber(){
@@ -75,12 +108,31 @@ public class Room implements IActorMovement, Subject{
 
     public void setActor(BodyInterface actor, int i, int j){
       this.cells[i][j].setActor(actor);
-      // this.notify();
+      this.notifyObserver(i, j, actor.getImg(), actor.getId());
     }
 
     public void clearActor(int i, int j){
-      BodyInterface empty = AbstractFactory.createBodyFactory().create('#');
+      BodyInterface empty = AbstractFactory.createBodyFactory().create('#', i, j);
       this.cells[i][j].clearActor(empty);
-      // this.notify();
+      this.notifyObserver(i, j, null, '#');
+    }
+
+    @Override
+    public char getId(int i, int j) {
+        return this.cells[i][j].getId();
+    }
+
+    @Override
+    public BufferedImage getImg(int i, int j) {
+      return this.cells[i][j].getImg();
+    }
+
+    public void setKeyInput(IPlayer player, IKeyboard keyInput){
+      keyInput.connect(player);
+    }
+
+    @Override
+    public Room getInverse() {
+      return this.invertedRoom;
     }
 }

@@ -1,7 +1,7 @@
 package game.body;
 
 public class Monolith extends Rigid{
-    public Monolith(char id){
-        super(id);
+    public Monolith(char id, int i, int j){
+        super(id, i, j);
     }
 }
