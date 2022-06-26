@@ -18,5 +18,9 @@ public interface IRoom {
 
     public Room getLastRoom();
 
+    public char getId(int i, int j);
+
     public boolean hasDoor(int i, int j);
+
+    public void moveBody(int i, int j, int[] ori);
 }

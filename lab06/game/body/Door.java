@@ -2,6 +2,7 @@ package game.body;
 
 public class Door extends Rigid{
     public boolean isLocked = true;
+    public boolean linkedToNextRoom; 
 
     public Door(char id, int i, int j){
         super(id, i, j);
@@ -18,4 +19,8 @@ public class Door extends Rigid{
         this.isLocked = false;
         this.isTangible = false;
     }    
+
+    public boolean getNextRoomLink(){
+        return this.linkedToNextRoom;
+    }
 }

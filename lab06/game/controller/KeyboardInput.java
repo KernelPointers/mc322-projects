@@ -23,6 +23,8 @@ public class KeyboardInput extends KeyAdapter implements ReqIPlayer, IKeyboard{
             player.move('r');
         else if (key == KeyEvent.VK_I)
             player.invert();
+        else if (key == KeyEvent.VK_E)
+            player.interact();
         
     }
 

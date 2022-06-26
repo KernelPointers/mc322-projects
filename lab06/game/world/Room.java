@@ -41,7 +41,7 @@ public class Room implements IRoom, Subject{
             this.setKeyInput(body , keyInput); 
             Cell c = new Cell(body, y, x);
             cells[y][x] = c;
-        } else{
+        } else {
             BodyInterface body = bodyFact.create(cellValue, y, x);
             body.connect(this);
             Cell c = new Cell(body, y, x);
@@ -145,4 +145,10 @@ public class Room implements IRoom, Subject{
     public Room getLastRoom(){
       return this.world.getRoom(this.levelNumber - 1, true);
     }
+
+    public void moveBody(int i, int j, int[] ori){
+      this.setActor(this.cells[i][j].getBody(), i + ori[1], j + ori[0]);
+      this.clearActor(i, j);
+    }
+ 
 }
