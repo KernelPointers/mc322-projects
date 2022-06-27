@@ -78,7 +78,7 @@ public class Room implements IRoom, Subject{
       }
     
 
-    public void notifyObserver(int i, int j, BufferedImage[] img, char id){
+    public void notifyObserver(int i, int j, BufferedImage img, char id){
       for (IntViewRoom obs : this.subscribers) 
         obs.update(i, j, img, id);
     }
@@ -104,7 +104,7 @@ public class Room implements IRoom, Subject{
 
     public void setActor(BodyInterface actor, int i, int j){
       this.cells[i][j].setActor(actor);
-      this.notifyObserver(i, j, actor.getImg(), actor.getId());
+      this.notifyObserver(i, j, actor.getCurrentImage(), actor.getId());
     }
 
     public void clearActor(int i, int j){
@@ -125,7 +125,7 @@ public class Room implements IRoom, Subject{
     }
 
     @Override
-    public BufferedImage[] getImg(int i, int j) {
+    public BufferedImage getImg(int i, int j) {
       return this.cells[i][j].getImg();
     }
 
@@ -147,8 +147,25 @@ public class Room implements IRoom, Subject{
     }
 
     public void moveBody(int i, int j, int[] ori){
-      this.setActor(this.cells[i][j].getBody(), i + ori[1], j + ori[0]);
-      this.clearActor(i, j);
+      if (this.canMove(i, j)){
+        int oldI = i - ori[1], oldJ = j - ori[0];
+        this.setActor(this.cells[oldI][oldJ].getBody(), i, j);
+        this.clearActor(i - ori[1], j - ori[0]);
+        this.cells[i][j].setI(i);
+        this.cells[i][j].setJ(j);
+      }
+    }
+
+    public void dragBody(int oldI, int oldJ, int i, int j, int[] ori){
+        this.setActor(this.cells[oldI][oldJ].getBody(), i, j);
+        this.clearActor(oldI, oldJ);
+        this.cells[i][j].setI(i);
+        this.cells[i][j].setJ(j);
+
+    }
+
+    public BodyInterface getBody(int i, int j){
+      return this.cells[i][j].getBody();
     }
  
 }

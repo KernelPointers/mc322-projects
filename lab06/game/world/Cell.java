@@ -20,8 +20,8 @@ public class Cell {
         return this.id;
     }
 
-    public BufferedImage[] getImg(){
-        return this.body.getImg();
+    public BufferedImage getImg(){
+        return this.body.getCurrentImage();
     }
 
     public BodyInterface getBody(){
@@ -40,5 +40,13 @@ public class Cell {
 
     public boolean isTangible(){
         return this.body.isTangible();
+    }
+
+    public void setJ(int j) {
+        this.body.setJ(j);
+    }
+
+    public void setI(int i){
+        this.body.setI(i);
     }
 }

@@ -14,6 +14,7 @@ public abstract class Body implements BodyInterface, RIRoom{
     protected boolean isTangible = true;
     protected BufferedImage img[];
     protected IRoom room;
+    protected BufferedImage currentImg;
    
     public Body(char id, int i, int j){
         this.id = id;
@@ -36,6 +37,10 @@ public abstract class Body implements BodyInterface, RIRoom{
 
     public BufferedImage[] getImg(){
         return this.img;
+    }
+
+    public BufferedImage getCurrentImage(){
+        return this.currentImg;
     }
 
     public void readImg(String dir, int num){

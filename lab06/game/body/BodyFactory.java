@@ -25,10 +25,10 @@ public class BodyFactory implements IntBodyFactory{
                 body = new Wall('w', i, j); break;
             case 'k' : // key
                 body = new Key('k', i, j); break;
-            case 'c' : // chest
-                body = new Chest('c', i, j); break;
             case 'l': // lever
                 body = new Lever('l', i, j); break;
+            case 'v': // void
+                body = new Void('v', i, j);
         }
         return body;
    }

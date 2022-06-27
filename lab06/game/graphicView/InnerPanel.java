@@ -1,11 +1,9 @@
 package game.graphicView;
 
-import javax.swing.GrayFilter;
 import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import java.awt.Dimension;
 
@@ -21,7 +19,7 @@ public class InnerPanel extends JPanel {
         this.setMaximumSize(dim);
         this.setMinimumSize(dim);
 
-        this.setBackground(Color.BLACK);
+        this.setBackground(Color.black);
         this.setDoubleBuffered(true);
 
     } 
@@ -32,7 +30,6 @@ public class InnerPanel extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
 
 
-        window.setTileGrid(g2, this.window.getWidth(), this.window.getHeight(), 80, 72);
         window.displayViewMatrix(g2, this.window.getWidth(), this.window.getHeight());
 
         g2.dispose();

@@ -4,14 +4,14 @@ import java.awt.image.BufferedImage;
 
 public class ViewCell {
     char id = '#';
-    BufferedImage[] img;
+    BufferedImage img;
 
-    public void setImg(BufferedImage[] img, char id){
+    public void setImg(BufferedImage img, char id){
         this.img = img;
         this.id = id;
     }
 
-    public BufferedImage[] getImg(){
+    public BufferedImage getImg(){
         return this.img;
     }
 

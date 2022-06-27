@@ -12,6 +12,7 @@ public class ViewRoom implements IntViewRoom{
     private ViewCell[][] viewCells;
     private Subject sub;
     private boolean newRoom = true;
+    private boolean isInv = false;
 
     public ViewRoom(){
         this.viewCells = new ViewCell[iNum][jNum];
@@ -33,8 +34,12 @@ public class ViewRoom implements IntViewRoom{
         return this.jNum;
     }
 
-    public BufferedImage[] getImg(int i, int j){
+    public BufferedImage getImg(int i, int j){
         return this.viewCells[i][j].getImg();
+    }
+
+    public char getId(int i, int j){
+        return this.viewCells[i][j].getId();
     }
 
     public void setLevelIndex(int levelIndex){
@@ -54,7 +59,7 @@ public class ViewRoom implements IntViewRoom{
     }
 
     @Override
-    public void update(int i, int j, BufferedImage[] sprite, char id){
+    public void update(int i, int j, BufferedImage sprite, char id){
         if (id == 'p'){
             this.playerI = i;
             this.playerJ = j;
@@ -79,7 +84,7 @@ public class ViewRoom implements IntViewRoom{
                         this.playerI = i;
                         this.playerJ = j;
                     }
-                    BufferedImage[] img = sub.getImg(i, j);
+                    BufferedImage img = sub.getImg(i, j);
                     cell.setImg(img, id);
                     viewCells[i][j] = cell;
                 }
@@ -103,5 +108,17 @@ public class ViewRoom implements IntViewRoom{
 
     public int getPlayerScreenJ(){
         return this.playerScreenJ;
+    }
+
+    @Override
+    public boolean isInv() {
+        return this.isInv;
+    }
+
+    public void toogleInv(){
+        if (this.isInv)
+            this.isInv = false;
+        else
+            this.isInv = true;
     }
 }

@@ -13,7 +13,7 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
     }
 
     public void run(){
-        int fps = 60;
+        int fps = 300;
         double interval = 1E9 / fps;
         double dt = 0;
         long last = System.nanoTime(); 

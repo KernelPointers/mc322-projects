@@ -6,4 +6,7 @@ import game.graphicView.RequiredInterfaces.RIObs;
 
 public interface IntViewRoom extends 
             IObs, RIObs, IViewRoom{
+
+
+   
 }

@@ -7,6 +7,7 @@ public class Door extends Rigid{
     public Door(char id, int i, int j){
         super(id, i, j);
         this.readImg("assets/door/", 1);
+        this.currentImg = this.img[0];
         
         this.isTangible = false;
     }

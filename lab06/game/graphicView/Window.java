@@ -13,7 +13,7 @@ import game.graphicView.ProvidedInterfaces.IWindow;
 import game.graphicView.ProvidedInterfaces.ICamera;
 import game.graphicView.RequiredInterfaces.RIKeyboardInput;
 
-public class Window extends Canvas implements IWindow, RIKeyboardInput, ICamera{
+public class Window extends Canvas implements IWindow, RIKeyboardInput{
     private JFrame frame;
     private InnerPanel panel;
     private int width, height; 
@@ -62,7 +62,7 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput, ICamera{
     public void render(Graphics2D g, int width, int height){
 
 
-        this.setTileGrid(g, width, height, 80, 72);
+        //this.setTileGrid(g, width, height, 80, 72);
 
         this.displayViewMatrix(g, width, height);
 
@@ -76,74 +76,75 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput, ICamera{
     public int transformX(int x){
         int tileWidth = 80;
         return x - 
-            (this.viewRoom.getPlayerJ() * 80 ) + 
-            (this.viewRoom.getPlayerScreenJ() * 80);
+            (this.viewRoom.getPlayerJ() * tileWidth ) + 
+            (this.viewRoom.getPlayerScreenJ() * tileWidth);
     }
 
     public int transformY(int y){
+        int tileHeight = 72;
         return y - 
-            (this.viewRoom.getPlayerI() * 72) + 
-            (this.viewRoom.getPlayerScreenI() * 72);
+            (this.viewRoom.getPlayerI() * tileHeight) + 
+            (this.viewRoom.getPlayerScreenI() * tileHeight);
     }
 
-    public void drawComponent(Graphics2D g, int x, int y, BufferedImage[] img) {  
-        if (!(img == null)){
+    public void drawComponent(Graphics2D g, int x, int y, BufferedImage img) {  
+        if (img != null){
             int newX = transformX(x);
             int newY = transformY(y);
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                                RenderingHints.VALUE_ANTIALIAS_ON);
             AffineTransform restoreMatrix = g.getTransform();
-            g.rotate(this.angle, 
-                    this.transformX(this.viewRoom.getPlayerJ()), 
-                    this.transformY(this.viewRoom.getPlayerI()));
-            for (int i = 0; i < img.length; i++){
+            g.rotate(this.angle, this.viewRoom.getPlayerScreenI(), 
+            this.viewRoom.getPlayerScreenJ());
+                    //this.transformX(this.viewRoom.getPlayerJ()), 
+                    //this.transformY(this.viewRoom.getPlayerI()));
                 //int dist = i + z;
                 //float lx = dist * angCos
                 //float ly = dist * angSin
-                g.drawImage(img[i], newX, newY, this);
+            g.drawImage(img, newX, newY, 80, 80, this);
                 //this.getBufferStrategy().show();
-            }
             g.setTransform(restoreMatrix);
         }
 
 
     }  
 
-    public void setTileGrid(Graphics2D g, int width, int height, int tileWidth, int tileHeight){
-        int xNUm = this.viewRoom.getJnum();
-        double yNUm = this.viewRoom.getInum();
-        int num = 1; // NUMERO DE SPRITES BASE
-        BufferedImage[] img = new BufferedImage[num];
-            for (int i = 0; i < num; i++){
-            String sprite_name = "assets/stacked_dirt_floor/" + i + ".png"; 
-            try {
-                img[i] = ImageIO.read(new File(sprite_name));
-            } catch (Exception err){
-
-           }
-            }
-        
-            for (int i = 0; i < yNUm; i++){
-                int yGap = tileHeight * i;
-                for (int j = 0; j < xNUm; j++){
-                    int xGap = tileWidth * j;
-                    this.drawComponent(g, xGap, yGap, img); 
-                }
-            }
-
-      
-
-    }
 
     public void displayViewMatrix(Graphics2D g, int width, int height){
        double xNUm = this.viewRoom.getJnum();
        double yNUm = this.viewRoom.getInum();
+        int num = 2;
+        BufferedImage[] img = new BufferedImage[num];
+        for(int k = 0; k < num; k++){
+            String sprite_name = "assets/floor/" + k + ".png"; 
+            try {
+                img[k] = ImageIO.read(new File(sprite_name));
+            } catch (Exception err){
+
+            }
+        }
+
+        BufferedImage current;
+        if (this.viewRoom.isInv())
+            current = img[1];
+        else
+            current = img[0];
+
+
 
        for (int i = 0; i  < yNUm; i++){
-           int y = 72 * i; 
+           int y = 80 * i; 
            for (int j = 0; j < xNUm; j++){
                 int x = 80 * j; 
-                this.drawComponent(g, x, y, this.viewRoom.getImg(i, j));
+                char id = this.viewRoom.getId(i, j);
+                if(id != 'v'){
+                   
+                    this.drawComponent(g, x, y, current); 
+                    
+                    if (id != '#')    
+                        this.drawComponent(g, x, y, this.viewRoom.getImg(i, j));
+                }
+
            }
        } 
     }
