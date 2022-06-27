@@ -93,7 +93,9 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput, ICamera{
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                                RenderingHints.VALUE_ANTIALIAS_ON);
             AffineTransform restoreMatrix = g.getTransform();
-            g.rotate(this.angle, newX, newY);
+            g.rotate(this.angle, 
+                    this.transformX(this.viewRoom.getPlayerJ()), 
+                    this.transformY(this.viewRoom.getPlayerI()));
             for (int i = 0; i < img.length; i++){
                 //int dist = i + z;
                 //float lx = dist * angCos
