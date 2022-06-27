@@ -16,5 +16,10 @@ public interface IViewRoom {
     public BufferedImage[] getImg(int i, int j);
 
     public void setLevelIndex(int levelIndex);
+
+    public int getPlayerI();
+    public int getPlayerJ();
+    public int getPlayerScreenI();
+    public int getPlayerScreenJ();
     
 }

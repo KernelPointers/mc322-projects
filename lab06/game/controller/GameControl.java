@@ -13,29 +13,37 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
     }
 
     public void run(){
-        double startTime = Time.getTime();
-        double endTime = Time.getTime();
+        int fps = 60;
+        double interval = 1E9 / fps;
         double dt = 0;
+        long last = System.nanoTime(); 
+        long current;
 
+        this.window.showWindow();
         this.running = true;
+
         while (running){
-            endTime = Time.getTime();
-            dt = (endTime - startTime);
-            startTime = endTime;
 
+            current = System.nanoTime();
 
+            dt += (current - last) / interval;
 
-            this.window.setGraphics();
+            last = current;
 
-            //System.out.println(1 / dt);
-
-            //window.setGraphics();
-            //while (dt >= 1){
-                //dt--;
-            //}
-
+            if (dt >= 1){
+                //update
+                this.window.updateCanvas();
+                dt--;
+            }
 
         }
+    }
+
+    public void start(){
+    }
+
+    public void stop(){
+
     }
 
 }

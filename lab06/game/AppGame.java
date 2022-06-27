@@ -25,7 +25,7 @@ public class AppGame extends Canvas{
        IgraphicViewFactory vFactory = AbstractFactory.createViewFactory();
 
        IWindow window = vFactory.createWindow(1920, 1080, "Game");
-       IntViewRoom viewRoom = vFactory.createViewRoom(15, 24, 0);
+       IntViewRoom viewRoom = vFactory.createViewRoom(30, 48, 0);
         
        builder.connect(world);
        builder.connect(viewRoom);

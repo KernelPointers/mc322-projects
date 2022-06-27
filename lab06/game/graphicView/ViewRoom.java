@@ -5,8 +5,10 @@ import java.awt.image.BufferedImage;
 import game.world.Subject;
 
 public class ViewRoom implements IntViewRoom{
-    private int iNum = 15, jNum = 24;
+    private int iNum = 30, jNum = 48;
     private int levelIndex;
+    private int playerI, playerJ;
+    private int playerScreenI = 7, playerScreenJ = 12;
     private ViewCell[][] viewCells;
     private Subject sub;
     private boolean newRoom = true;
@@ -53,6 +55,10 @@ public class ViewRoom implements IntViewRoom{
 
     @Override
     public void update(int i, int j, BufferedImage[] sprite, char id){
+        if (id == 'p'){
+            this.playerI = i;
+            this.playerJ = j;
+        }
         this.viewCells[i][j].setImg(sprite, id);
     }
 
@@ -68,7 +74,13 @@ public class ViewRoom implements IntViewRoom{
             for (int i = 0; i < this.iNum; i++){
                 for (int j = 0; j < this.jNum; j++){
                     ViewCell cell = new ViewCell();
-                    cell.setImg(sub.getImg(i, j), sub.getId(i, j));
+                    char id = sub.getId(i, j);
+                    if (id == 'p'){
+                        this.playerI = i;
+                        this.playerJ = j;
+                    }
+                    BufferedImage[] img = sub.getImg(i, j);
+                    cell.setImg(img, id);
                     viewCells[i][j] = cell;
                 }
             } 
@@ -77,4 +89,19 @@ public class ViewRoom implements IntViewRoom{
     }
 
 
+    public int getPlayerI(){
+        return this.playerI;
+    }
+
+    public int getPlayerJ(){
+        return this.playerJ;
+    }
+
+    public int getPlayerScreenI(){
+        return this.playerScreenI;
+    }
+
+    public int getPlayerScreenJ(){
+        return this.playerScreenJ;
+    }
 }

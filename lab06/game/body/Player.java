@@ -4,6 +4,7 @@ import game.body.ProvidedInterfaces.IPlayer;
 
 public class Player extends Actor implements IPlayer{
     private boolean isLinked = false;
+    private int cameraI, cameraJ;
 
     public Player(char id, int i, int j){
         super(id, i, j);
@@ -62,6 +63,14 @@ public class Player extends Actor implements IPlayer{
 
         super.move(dir);
 
+    }
+
+    public int getPlayerScreenI(){
+        return this.cameraI;
+    }
+
+    public int getPlayerScreenJ(){
+        return this.cameraJ;
     }
 
 }

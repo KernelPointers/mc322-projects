@@ -7,7 +7,7 @@ import game.world.WorldInterface;
 public class Builder implements BuilderInterface{
         private WorldInterface world;
         private IntViewRoom viewRoom;
-        private int layoutNum = 11;
+        private int layoutNum = 1;
     
         @Override
         public void connect(WorldInterface world){

@@ -10,10 +10,12 @@ public interface IWindow {
 
    public void tick(double dt);
 
-   public void setGraphics();
+   public void showWindow();
 
    public void connect(IntViewRoom viewRoom);
 
    public void connectKeyInput(IKeyboard keyinput);
+
+   public void updateCanvas();
 
 }

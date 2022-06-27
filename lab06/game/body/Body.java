@@ -10,7 +10,7 @@ import game.world.ProvidedInterfaces.IRoom;
 
 public abstract class Body implements BodyInterface, RIRoom{
     protected char id;
-    protected int i, j;
+    protected int i, j; // coordenadas globais
     protected boolean isTangible = true;
     protected BufferedImage img[];
     protected IRoom room;

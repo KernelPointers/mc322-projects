@@ -12,7 +12,7 @@ import game.AbstractFactory;
 import game.graphicView.IntViewRoom;
 
 public class Room implements IRoom, Subject{
-    private int iNum = 15, jNum = 24; // geral para casos onde jNum > iNum
+    private int iNum = 30, jNum = 48; // geral para casos onde jNum > iNum
     private int levelNumber;
     private boolean isInverted = false;
     private Cell[][] cells = new Cell[iNum][jNum];
