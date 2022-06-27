@@ -5,14 +5,18 @@ import java.awt.event.KeyEvent;
 
 import game.body.ProvidedInterfaces.IPlayer;
 import game.controller.ProvidedInterfaces.IKeyboard;
+import game.controller.RequiredInterfaces.RICamera;
 import game.controller.RequiredInterfaces.ReqIPlayer;
+import game.graphicView.ProvidedInterfaces.ICamera;
 
-public class KeyboardInput extends KeyAdapter implements ReqIPlayer, IKeyboard{
+public class KeyboardInput extends KeyAdapter implements ReqIPlayer, RICamera, IKeyboard{
     IPlayer player;
+    ICamera camera;
+
 
     public void keyPressed(KeyEvent event){
         int key = event.getKeyCode();
-
+        
         if (key == KeyEvent.VK_W)
             player.move('u');
         else if (key == KeyEvent.VK_S)
@@ -25,12 +29,23 @@ public class KeyboardInput extends KeyAdapter implements ReqIPlayer, IKeyboard{
             player.invert();
         else if (key == KeyEvent.VK_E)
             player.interact();
-        
+        else if (key == KeyEvent.VK_RIGHT){
+            this.camera.rotateCamera('r');
+        }
+        else if (key == KeyEvent.VK_LEFT){
+            this.camera.rotateCamera('l');
+        }
     }
+
+
 
     @Override
     public void connect(IPlayer player) {
        this.player = player; 
+    }
+
+    public void connect(ICamera camera){
+        this.camera = camera;
     }
 
         

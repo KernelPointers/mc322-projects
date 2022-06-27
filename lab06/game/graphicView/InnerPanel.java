@@ -32,10 +32,9 @@ public class InnerPanel extends JPanel {
         Graphics2D g2 = (Graphics2D)g;
 
 
-        window.setTileGrid(g, this.window.getWidth(), this.window.getHeight(), 80, 72);
-        window.displayViewMatrix(g, this.window.getWidth(), this.window.getHeight());
+        window.setTileGrid(g2, this.window.getWidth(), this.window.getHeight(), 80, 72);
+        window.displayViewMatrix(g2, this.window.getWidth(), this.window.getHeight());
 
-        g.dispose();
         g2.dispose();
 
     }

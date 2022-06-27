@@ -5,16 +5,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
 import java.io.File;
 
 import game.controller.ProvidedInterfaces.IKeyboard;
 import game.graphicView.ProvidedInterfaces.IWindow;
+import game.graphicView.ProvidedInterfaces.ICamera;
 import game.graphicView.RequiredInterfaces.RIKeyboardInput;
 
-public class Window extends Canvas implements IWindow, RIKeyboardInput{
+public class Window extends Canvas implements IWindow, RIKeyboardInput, ICamera{
     private JFrame frame;
     private InnerPanel panel;
     private int width, height; 
+    private double angle = 0, rot = Math.PI / 40; // 4.5 graus
     private String name;
     private IntViewRoom viewRoom;
     private IKeyboard keyInput;
@@ -56,7 +59,7 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
     public String getName(){
         return this.name;
     }
-    public void render(Graphics g, int width, int height){
+    public void render(Graphics2D g, int width, int height){
 
 
         this.setTileGrid(g, width, height, 80, 72);
@@ -83,23 +86,31 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
             (this.viewRoom.getPlayerScreenI() * 72);
     }
 
-    public void drawComponent(Graphics g, int x, int y, BufferedImage[] img) {  
-        if (!(img == null))
+    public void drawComponent(Graphics2D g, int x, int y, BufferedImage[] img) {  
+        if (!(img == null)){
+            int newX = transformX(x);
+            int newY = transformY(y);
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                               RenderingHints.VALUE_ANTIALIAS_ON);
+            AffineTransform restoreMatrix = g.getTransform();
+            g.rotate(this.angle, newX, newY);
             for (int i = 0; i < img.length; i++){
                 //int dist = i + z;
                 //float lx = dist * angCos
                 //float ly = dist * angSin
-                g.drawImage(img[i], transformX(x), transformY(y), this);
+                g.drawImage(img[i], newX, newY, this);
                 //this.getBufferStrategy().show();
             }
+            g.setTransform(restoreMatrix);
+        }
 
 
     }  
 
-    public void setTileGrid(Graphics g, int width, int height, int tileWidth, int tileHeight){
+    public void setTileGrid(Graphics2D g, int width, int height, int tileWidth, int tileHeight){
         int xNUm = this.viewRoom.getJnum();
         double yNUm = this.viewRoom.getInum();
-        int num = 16;
+        int num = 1; // NUMERO DE SPRITES BASE
         BufferedImage[] img = new BufferedImage[num];
             for (int i = 0; i < num; i++){
             String sprite_name = "assets/stacked_dirt_floor/" + i + ".png"; 
@@ -122,7 +133,7 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
 
     }
 
-    public void displayViewMatrix(Graphics g, int width, int height){
+    public void displayViewMatrix(Graphics2D g, int width, int height){
        double xNUm = this.viewRoom.getJnum();
        double yNUm = this.viewRoom.getInum();
 
@@ -151,6 +162,14 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
     @Override
     public void updateCanvas(){
         this.panel.repaint();
+    }
+
+    @Override
+    public void rotateCamera(char dir) {
+        if (dir == 'l')
+            this.angle += rot;
+        else
+            this.angle -= rot; 
     }
 
 

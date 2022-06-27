@@ -1,12 +1,12 @@
 package game.graphicView.ProvidedInterfaces;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import game.controller.ProvidedInterfaces.IKeyboard;
 import game.graphicView.IntViewRoom;
 
-public interface IWindow {
-   public void render(Graphics g, int width, int height); 
+public interface IWindow extends ICamera{
+   public void render(Graphics2D g, int width, int height); 
 
    public void tick(double dt);
 

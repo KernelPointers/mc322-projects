@@ -27,6 +27,8 @@ public class AppGame extends Canvas{
        IWindow window = vFactory.createWindow(1920, 1080, "Game");
        IntViewRoom viewRoom = vFactory.createViewRoom(30, 48, 0);
         
+       keyInput.connect(window);
+
        builder.connect(world);
        builder.connect(viewRoom);
 
