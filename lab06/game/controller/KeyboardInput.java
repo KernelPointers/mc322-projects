@@ -10,8 +10,21 @@ import game.controller.RequiredInterfaces.ReqIPlayer;
 import game.graphicView.ProvidedInterfaces.ICamera;
 
 public class KeyboardInput extends KeyAdapter implements ReqIPlayer, RICamera, IKeyboard{
-    IPlayer player;
-    ICamera camera;
+    private IPlayer player;
+    private ICamera camera;
+    private boolean running = true;
+    
+    public void subscribe(){
+        this.player.addObs(this);
+    }
+
+    public boolean getStatus(){
+        return this.running;
+    }
+
+    public void setRunning(boolean bool){
+        this.running = bool;
+    }
 
 
     public void keyPressed(KeyEvent event){
@@ -44,6 +57,7 @@ public class KeyboardInput extends KeyAdapter implements ReqIPlayer, RICamera, I
     @Override
     public void connect(IPlayer player) {
        this.player = player; 
+       this.player.addObs(this);
     }
 
     public void connect(ICamera camera){

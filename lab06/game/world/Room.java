@@ -20,7 +20,9 @@ public class Room implements IRoom, Subject{
     private ArrayList<IntViewRoom> subscribers = new ArrayList<IntViewRoom>();
     private Room invertedRoom;
     private World world = World.getInstance();
-
+    private boolean isButtonPressed = false;
+    private int bI, bJ;
+  
     public Room(int levelNumber){
       this.levelNumber = levelNumber;
     }
@@ -36,8 +38,6 @@ public class Room implements IRoom, Subject{
 				char cellValue = buildCmd.charAt(i);
         IntBodyFactory bodyFact = AbstractFactory.createBodyFactory();
 
-        
-
         if (cellValue == 'p'){
             IPlayer body = bodyFact.createPlayer(y, x);
             body.connect(this);
@@ -50,6 +50,8 @@ public class Room implements IRoom, Subject{
             Cell c = new Cell(body, y, x);
             c.setButton(body);
             cells[y][x] = c;
+            this.bI = y;
+            this.bJ = x;
         } else {
             BodyInterface body = bodyFact.create(cellValue, y, x);
             body.connect(this);
@@ -75,6 +77,10 @@ public class Room implements IRoom, Subject{
 
     public void detach(IntViewRoom obs){
       this.subscribers.remove(obs);
+    }
+
+    public void toogleButton(boolean bool){
+      this.isButtonPressed = bool;
     }
 
     public boolean getButtonStats(int i, int j){
@@ -109,7 +115,7 @@ public class Room implements IRoom, Subject{
     } 
 
     public boolean hasCollision(int i, int j){
-      if (!cells[i][j].isTangible())
+      if (!cells[i][j].isTangible() )
         return false;
       return true; 
 
@@ -125,6 +131,14 @@ public class Room implements IRoom, Subject{
       this.cells[i][j].clearActor(empty);
       this.notifyObserver(i, j, null, '#');
     
+    }
+
+    public boolean hasEnemy(int i, int j){
+      char id = this.getBody(i, j).getId();
+      if (id == 's' || id == 'h' || id == 'v')
+        return true;
+      else
+        return false;
     }
 
     @Override
@@ -167,7 +181,7 @@ public class Room implements IRoom, Subject{
     }
 
     public void moveBody(int i, int j, int[] ori){
-      if (this.canMove(i, j)){
+      if (this.canMove(i, j) && !this.hasEnemy(i, j)){
         int oldI = i - ori[1], oldJ = j - ori[0];
         this.setActor(this.cells[oldI][oldJ].getBody(), i, j);
         this.clearActor(i - ori[1], j - ori[0]);
@@ -177,11 +191,28 @@ public class Room implements IRoom, Subject{
     }
 
     public void dragBody(int oldI, int oldJ, int i, int j, int[] ori){
+      if (!this.hasEnemy(i, j)){
         this.setActor(this.cells[oldI][oldJ].getBody(), i, j);
         this.clearActor(oldI, oldJ);
         this.cells[i][j].setI(i);
         this.cells[i][j].setJ(j);
+      }
 
+    }
+
+    public void swapBody(int i, int j, int x, int y){
+      Cell temp =  this.cells[i][j];
+      BodyInterface tempB = temp.getBody();
+
+      this.cells[x][y].getBody().setI(i);
+      this.cells[x][y].getBody().setJ(j);
+
+      this.setActor(this.cells[x][y].getBody(), i, j);
+
+      this.setActor(tempB, x, y);
+
+      tempB.setI(x);
+      tempB.setJ(y);
     }
 
     public BodyInterface getBody(int i, int j){
@@ -196,6 +227,11 @@ public class Room implements IRoom, Subject{
 
     public void update(int i, int j) {
       this.getBody(i, j).update();
+    }
+
+    @Override
+    public boolean getButton() {
+      return this.isButtonPressed;
     }
  
 }

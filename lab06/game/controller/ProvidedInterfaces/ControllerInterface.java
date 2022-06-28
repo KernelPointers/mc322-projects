@@ -6,4 +6,6 @@ public interface ControllerInterface{
     public void run();
 
     public void connect(IWindow window);
+
+    public void setInput(IKeyboard keyInput);
 }

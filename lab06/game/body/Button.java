@@ -19,10 +19,12 @@ public class Button extends Body implements IButton{
 
     public void activate(){
         this.activated = true;
+        this.room.toogleButton(activated);
     }
 
     public void deactivate(){
         this.activated = false;
+        this.room.toogleButton(activated);
     }
 
     public boolean isPressed(){

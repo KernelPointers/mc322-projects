@@ -20,18 +20,16 @@ public class BodyFactory implements IntBodyFactory{
                 body = new Button('a', i, j); break;
             case 'd': // door
                 body = new Door('d', i, j); break;
-            case 'm' : // monolith
-                body = new Monolith('m', i, j); break;
             case 'w': // wall
                 body = new Wall('w', i, j); break;
             case 'k' : // key
                 body = new Key('k', i, j); break;
-            case 'l': // lever
-                body = new Lever('l', i, j); break;
             case 'v': // void
                 body = new Void('v', i, j);
-            case 's':
+            case 's': // spike
                 body = new Spike('s', i, j);
+            case 'h': // hole
+                body = new Hole('h', i, j);
         }
         return body;
    }

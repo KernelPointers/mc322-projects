@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.controller.ProvidedInterfaces.ControllerInterface;
+import game.controller.ProvidedInterfaces.IKeyboard;
 import game.controller.RequiredInterfaces.RIWindow;
 import game.graphicView.ProvidedInterfaces.IWindow;
 import game.world.Room;
@@ -12,9 +13,14 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
     private int levelIndex;
     private boolean levelStatus;
     private World world = World.getInstance();
+    private IKeyboard input;
     
     public void connect(IWindow window){
         this.window = window;
+    }
+
+    public void setInput(IKeyboard input){
+        this.input = input;
     }
 
     @Override
@@ -46,6 +52,8 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
                 dt--;
             }
 
+            this.running = input.getStatus();
+
         }
     }
 
@@ -75,6 +83,10 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
                 currentRoom.update(i, j);
             }
         }
+    }
+
+    public boolean getStatus() {
+        return this.running;
     }
 
 }

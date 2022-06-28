@@ -1,6 +1,7 @@
 package game.body;
 
 import game.body.ProvidedInterfaces.IPlayer;
+import game.controller.ProvidedInterfaces.IKeyboard;
 import game.world.Room;
 import game.world.ProvidedInterfaces.IRoom;
 
@@ -13,41 +14,27 @@ public class Player extends Body implements IPlayer {
     private BodyInterface linkedBody;
     private int nextI, nextJ;
     private int[] linkOrientation = new int[2];
-    private int spriteIndex, offset = 0;
+    private int spriteIndex;
+    private IKeyboard ctrl;
     private BodyInterface collectedItem;
     private int[] ori = new int[2]; // vetor de orientacao
     private char dir;
-    private boolean invertColors = false;
-    private BufferedImage[] invertedImg = new BufferedImage[4];
+    private int spawnI = 7, spawnJ = 15;
+    private boolean running = true;
 
     public Player(char id, int i, int j){
         super(id, i, j);
         //this.img = new Image()
-        this.readImg("assets/player/", 8);
+        this.readImg("assets/player/", 4);
         this.dir = 'r';
         this.currentImg = img[0];
     }
 
-    @Override
-    public void invertImg(){
-        // 0, 1 ,2, 3
-        this.spriteIndex = (this.spriteIndex + 4) % 8;
-        this.currentImg = this.img[spriteIndex];
-    }
+
 
     @Override
     public BufferedImage getCurrentImage(boolean isInv){
-        if (isInv)
-            this.invertImg();
         return this.currentImg;
-    }
-
-    public int toogleOffset(){
-        if (offset == 4){
-            this.offset = 0;
-        } else
-            this.offset = 4;
-        return this.offset;
     }
 
 
@@ -62,6 +49,11 @@ public class Player extends Body implements IPlayer {
                     this.moveToLastRoom();
                 return;
             }
+
+            if (this.room.hasEnemy(nextI, nextJ)){
+                this.die();
+                return;
+            }
             
 
             room.setActor(this, nextI, nextJ);
@@ -72,25 +64,47 @@ public class Player extends Body implements IPlayer {
         }
     }
 
+    public void die(){
+        int lastI = this.i, lastJ = this.j;
+        
+        if (this.room.getInv())
+            this.changeRoom(this.room.getInverse(), i, j);
+
+        this.room.swapBody(this.i, this.j, this.spawnI, this.spawnJ);
+        
+        this.unlink();
+        if (this.isInventoryFull)
+            this.drop(lastI, lastJ);
+    }
+
+    public void notifyControl(){
+        this.ctrl.setRunning(this.running);
+    }
+
+
+    public void addObs(IKeyboard ctrl){
+        this.ctrl = ctrl;
+    }
+
     public void changeVectorOrientation(char dir){
         this.dir = dir;
 
         if (dir == 'u'){
             ori[0] = 0;
             ori[1] = -1;
-            this.spriteIndex = (!this.invertColors ? 3 : 7);
+            this.spriteIndex = (3);
         } else if (dir == 'd'){
             ori[0] = 0;
             ori[1] = 1;
-            this.spriteIndex = (!this.invertColors ? 2 : 6);
+            this.spriteIndex = (2);
         } else if (dir == 'r'){
             ori[0] = 1;
             ori[1] = 0;
-            this.spriteIndex = (!this.invertColors ? 0 : 4);
+            this.spriteIndex = (0);
         } else if (dir == 'l'){
             ori[0] = - 1;
             ori[1] = 0;
-            this.spriteIndex = (!this.invertColors ? 1 : 5);
+            this.spriteIndex = (1);
         } 
 
         
@@ -117,8 +131,6 @@ public class Player extends Body implements IPlayer {
     }
 
     public void invert(){
-        if (this.room.getInv())
-            this.invertColors = true; 
         IRoom invRoom = room.getInverse();
         this.invertImg();
         if (invRoom.canMove(this.i, this.j)){
@@ -136,6 +148,7 @@ public class Player extends Body implements IPlayer {
         this.changeRoom(this.room.getLastRoom(), 7, 22);
     }
 
+    @Override
      public void interact(){
         this.updateNextPos();
 
@@ -149,8 +162,16 @@ public class Player extends Body implements IPlayer {
                     this.linkBody(this.room.getBody(nextI, nextJ)); break;
                 case 'k' :
                     this.linkBody(this.room.getBody(nextI, nextJ)); break;
+                case 'd':
+                    this.unlock();
         }
         }
+    }
+
+    public void unlock(){
+            this.room.getBody(nextI, nextJ).interact(this.isInventoryFull);
+            this.isInventoryFull = false;
+            this.collectedItem = null;
     }
 
     public void collect(){
@@ -160,7 +181,7 @@ public class Player extends Body implements IPlayer {
         char nextId = this.room.getId(nextI, nextJ);
 
         if (this.isInventoryFull)
-            this.drop();
+            this.drop(this.nextI, this.nextJ);
         else {
             switch(nextId){
                 case 'k' : 
@@ -169,9 +190,10 @@ public class Player extends Body implements IPlayer {
         }
     }
 
-    public void drop(){
-        if (this.room.canMove(nextI, nextJ)){
+    public void drop(int nextI, int nextJ){
+        if (this.room.canMove(nextI, nextJ) && !this.room.hasEnemy(nextI, nextJ)){
             this.room.setActor(this.collectedItem, nextI, nextJ);
+            this.collectedItem = null;
             this.isInventoryFull = false;
         }
     }
@@ -206,7 +228,8 @@ public class Player extends Body implements IPlayer {
     }
 
     public void pull(){
-        if (this.room.getBody(this.i - this.ori[1], this.j - this.ori[0]) == this.linkedBody){
+        if (this.room.getBody(this.i - this.ori[1], this.j - this.ori[0]) == this.linkedBody &&
+            !this.room.hasEnemy(i + this.ori[1], j + this.ori[0])){
             this.moveDir();
 
             this.room.moveBody(this.i - this.ori[1], 
@@ -218,8 +241,12 @@ public class Player extends Body implements IPlayer {
     public void drag(){
         int bodyI = this.linkedBody.getI();
         int bodyJ = this.linkedBody.getJ();
-        if (this.room.canMove(bodyI + this.ori[1], bodyJ + this.ori[0]) &&
-                            this.room.canMove(this.nextI, this.nextJ)){
+        int nBodyI = bodyI + this.ori[1];
+        int nBodyJ = bodyJ + this.ori[0];
+        if (this.room.canMove(nBodyI, nBodyJ) &&
+            this.room.canMove(this.nextI, this.nextJ) &&
+            !this.room.hasEnemy(nBodyI, nBodyJ) &&
+            !this.room.hasEnemy(nextI, nextJ)){
 
             this.room.dragBody(bodyI, bodyJ, bodyI + this.ori[1], bodyJ + this.ori[0], ori);
             this.moveDir();

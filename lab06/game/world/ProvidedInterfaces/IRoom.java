@@ -32,5 +32,13 @@ public interface IRoom {
 
     public void notifyObserver(int i, int j, BufferedImage img, char id);
 
+    public boolean hasEnemy(int i, int j);
+
     public boolean getInv();
+
+    public void swapBody(int i, int j, int x, int y);
+
+    public void toogleButton(boolean bool);
+
+    public boolean getButton();
 }

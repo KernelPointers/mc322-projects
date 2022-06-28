@@ -39,6 +39,7 @@ public class AppGame extends Canvas{
        world.connect(keyInput);
        builder.buildWorld();
 
+       ctrl.setInput(keyInput);
        ctrl.connect(window);
        
        ctrl.run();

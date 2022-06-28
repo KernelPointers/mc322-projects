@@ -43,6 +43,9 @@ public abstract class Body implements BodyInterface, RIRoom{
         return this.img;
     }
 
+    public void interact(boolean bool){
+    }
+
     public BufferedImage getCurrentImage(boolean isInv){
         if (isInv && this.img!=null)
             this.invertImg();
