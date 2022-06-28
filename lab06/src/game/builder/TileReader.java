@@ -5,7 +5,7 @@ import java.io.FileReader;
 
 
 public class TileReader {
-    String layoutDir = System.getProperty("user.dir") + "/game/builder/layouts/";
+    String layoutDir = System.getProperty("user.dir") + "/data/";
 
     public String getCSV(int csvNum, String csvPath) {
         String buildSet = "";
