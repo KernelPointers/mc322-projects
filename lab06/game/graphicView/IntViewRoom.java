@@ -1,6 +1,5 @@
 package game.graphicView;
 
-import java.awt.image.BufferedImage;
 
 import game.graphicView.ProvidedInterfaces.IObs;
 import game.graphicView.ProvidedInterfaces.IViewRoom;

@@ -153,4 +153,9 @@ public class ViewRoom implements IntViewRoom{
     public void setButtonStats(boolean bool, int i, int j) {
         this.viewCells[i][j].setButtonStatus(bool);
     }
+
+    @Override
+    public int getIndex(){
+        return this.levelIndex;
+    }
 }

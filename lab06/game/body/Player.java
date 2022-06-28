@@ -17,12 +17,12 @@ public class Player extends Body implements IPlayer {
     private BodyInterface collectedItem;
     private int[] ori = new int[2]; // vetor de orientacao
     private char dir;
+    private boolean invertColors = false;
 
     public Player(char id, int i, int j){
         super(id, i, j);
         //this.img = new Image()
         this.readImg("assets/player/", 8);
-
         this.dir = 'r';
         this.currentImg = img[0];
     }
@@ -36,6 +36,7 @@ public class Player extends Body implements IPlayer {
 
     @Override
     public BufferedImage getCurrentImage(boolean isInv){
+        if (isInv)
             this.invertImg();
         return this.currentImg;
     }
@@ -73,25 +74,25 @@ public class Player extends Body implements IPlayer {
     public void changeVectorOrientation(char dir){
         this.dir = dir;
 
-
         if (dir == 'u'){
             ori[0] = 0;
             ori[1] = -1;
-            this.spriteIndex = (3 + offset) % 8;
+            this.spriteIndex = (!this.invertColors ? 3 : 7);
         } else if (dir == 'd'){
             ori[0] = 0;
             ori[1] = 1;
-            this.spriteIndex = (2 + offset) % 8;
+            this.spriteIndex = (!this.invertColors ? 2 : 6);
         } else if (dir == 'r'){
             ori[0] = 1;
             ori[1] = 0;
-            this.spriteIndex = (0 + offset) % 8;
+            this.spriteIndex = (!this.invertColors ? 0 : 4);
         } else if (dir == 'l'){
             ori[0] = - 1;
             ori[1] = 0;
-            this.spriteIndex = (1 + offset) % 8;
+            this.spriteIndex = (!this.invertColors ? 1 : 5);
         } 
 
+        
 
         this.currentImg = img[spriteIndex];
 
@@ -115,7 +116,10 @@ public class Player extends Body implements IPlayer {
     }
 
     public void invert(){
+        if (this.room.getInv())
+            this.invertColors = true; 
         IRoom invRoom = room.getInverse();
+        this.invertImg();
         if (invRoom.canMove(this.i, this.j)){
             this.changeRoom(this.room.getInverse(), this.i, this.j);
         }

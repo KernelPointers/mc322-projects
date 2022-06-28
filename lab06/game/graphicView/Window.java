@@ -3,14 +3,12 @@ package game.graphicView;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 
 import game.controller.ProvidedInterfaces.IKeyboard;
 import game.graphicView.ProvidedInterfaces.IWindow;
-import game.graphicView.ProvidedInterfaces.ICamera;
 import game.graphicView.RequiredInterfaces.RIKeyboardInput;
 
 public class Window extends Canvas implements IWindow, RIKeyboardInput{
@@ -47,6 +45,9 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
         this.frame.setVisible(true);
     }
 
+    public boolean getLevelStatus(){
+        return !this.viewRoom.isInv();
+    }
 
     public int getWidth(){
         return this.width;
@@ -71,6 +72,10 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
 
     public void tick(double dt){
         
+    }
+
+    public int getIndex(){
+        return this.viewRoom.getIndex();
     }
 
     public int transformX(int x){

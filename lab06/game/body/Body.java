@@ -22,6 +22,10 @@ public abstract class Body implements BodyInterface, RIRoom{
         this.j = j;
     }
 
+    public void update(){
+
+    }
+
     public void connect(IRoom room){
         this.room = room;
     }

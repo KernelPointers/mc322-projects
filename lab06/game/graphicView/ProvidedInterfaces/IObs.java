@@ -15,7 +15,7 @@ public interface IObs {
 
 
    public BufferedImage getButtonImg(int i, int j);
-
+   public int getIndex();
 
    public void setButtonStats(boolean bool, int i, int j);
    public boolean getButtonStats(int i, int j);

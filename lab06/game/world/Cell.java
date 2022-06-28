@@ -1,7 +1,6 @@
 package game.world;
 
 import game.body.BodyInterface;
-import game.body.Button;
 import game.body.ProvidedInterfaces.IButton;
 
 import java.awt.image.BufferedImage;

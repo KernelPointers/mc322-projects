@@ -18,4 +18,7 @@ public interface IWindow extends ICamera{
 
    public void updateCanvas();
 
+   public int getIndex();
+
+   public boolean getLevelStatus();
 }

@@ -193,5 +193,9 @@ public class Room implements IRoom, Subject{
         return this.isInverted;
       
     }
+
+    public void update(int i, int j) {
+      this.getBody(i, j).update();
+    }
  
 }
