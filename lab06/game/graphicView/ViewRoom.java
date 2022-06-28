@@ -72,7 +72,8 @@ public class ViewRoom implements IntViewRoom{
             this.playerI = i;
             this.playerJ = j;
         }
-        this.viewCells[i][j].setImg(sprite, id);
+        if (this.viewCells[i][j] != null)
+            this.viewCells[i][j].setImg(sprite, id);
     }
 
     @Override

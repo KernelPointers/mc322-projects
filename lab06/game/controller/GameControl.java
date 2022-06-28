@@ -3,6 +3,7 @@ package game.controller;
 import game.controller.ProvidedInterfaces.ControllerInterface;
 import game.controller.RequiredInterfaces.RIWindow;
 import game.graphicView.ProvidedInterfaces.IWindow;
+import game.world.Room;
 import game.world.World;
 
 public class GameControl implements RIWindow, Runnable, ControllerInterface{
@@ -18,16 +19,19 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
 
     @Override
     public void run(){
-        int fps = 300;
+        int fps = 60;
         double interval = 1E9 / fps;
         double dt = 0;
         long last = System.nanoTime(); 
         long current;
 
+        this.start();
+
         this.window.showWindow();
-        this.running = true;
 
         while (running){
+
+
 
             current = System.nanoTime();
 
@@ -36,13 +40,17 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
             last = current;
 
             if (dt >= 1){
-                //update
+                //this.update();  
                 this.window.updateCanvas();
-                this.update();    
+                  
                 dt--;
             }
 
         }
+    }
+
+    public void start(){
+        this.running = true;
     }
 
     public void getLevelIndex(){
@@ -53,16 +61,18 @@ public class GameControl implements RIWindow, Runnable, ControllerInterface{
         this.levelStatus = this.window.getLevelStatus();
     }
 
-    public void update(){
+    public void updateGame(){
         this.getLevelIndex();
         this.getLevelStatus();
 
         int iNum = 30;
         int jNum = 48;
 
+        Room currentRoom = this.world.getRoom(this.levelIndex, this.levelStatus);
+
         for (int i = 0; i < iNum; i++){
             for (int j = 0; j < jNum; j++){
-                this.world.getRoom(this.levelIndex, this.levelStatus).update(i, j);
+                currentRoom.update(i, j);
             }
         }
     }

@@ -18,6 +18,7 @@ public class Player extends Body implements IPlayer {
     private int[] ori = new int[2]; // vetor de orientacao
     private char dir;
     private boolean invertColors = false;
+    private BufferedImage[] invertedImg = new BufferedImage[4];
 
     public Player(char id, int i, int j){
         super(id, i, j);
