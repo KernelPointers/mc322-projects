@@ -39,8 +39,15 @@ public abstract class Body implements BodyInterface, RIRoom{
         return this.img;
     }
 
-    public BufferedImage getCurrentImage(){
+    public BufferedImage getCurrentImage(boolean isInv){
+        if (isInv && this.img!=null)
+            this.invertImg();
+
         return this.currentImg;
+    }
+
+    public void invertImg(){
+        this.currentImg = this.img[1]; // a principio, assumimos 2 sprites
     }
 
     public void readImg(String dir, int num){
@@ -73,6 +80,10 @@ public abstract class Body implements BodyInterface, RIRoom{
 
     public void setId(char id){
         this.id = id;
+    }
+
+    public boolean getInvStatus(){
+        return this.room.getInv();
     }
    
 }

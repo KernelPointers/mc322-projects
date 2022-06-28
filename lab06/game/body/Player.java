@@ -4,15 +4,19 @@ import game.body.ProvidedInterfaces.IPlayer;
 import game.world.Room;
 import game.world.ProvidedInterfaces.IRoom;
 
+import java.awt.image.BufferedImage;
+
 public class Player extends Body implements IPlayer {
     private boolean isLinked = false;
+    private boolean isInventoryFull = false;
     private int cameraI, cameraJ;
     private BodyInterface linkedBody;
     private int nextI, nextJ;
     private int[] linkOrientation = new int[2];
-
-    protected int[] ori = new int[2]; // vetor de orientacao
-    protected char dir;
+    private int spriteIndex, offset = 0;
+    private BodyInterface collectedItem;
+    private int[] ori = new int[2]; // vetor de orientacao
+    private char dir;
 
     public Player(char id, int i, int j){
         super(id, i, j);
@@ -23,10 +27,27 @@ public class Player extends Body implements IPlayer {
         this.currentImg = img[0];
     }
 
-    public void move(){
-
-     
+    @Override
+    public void invertImg(){
+        // 0, 1 ,2, 3
+        this.spriteIndex = (this.spriteIndex + 4) % 8;
+        this.currentImg = this.img[spriteIndex];
     }
+
+    @Override
+    public BufferedImage getCurrentImage(boolean isInv){
+            this.invertImg();
+        return this.currentImg;
+    }
+
+    public int toogleOffset(){
+        if (offset == 4){
+            this.offset = 0;
+        } else
+            this.offset = 4;
+        return this.offset;
+    }
+
 
     public void moveDir(){
         int nextI = this.i + this.ori[1], 
@@ -52,27 +73,29 @@ public class Player extends Body implements IPlayer {
     public void changeVectorOrientation(char dir){
         this.dir = dir;
 
+
         if (dir == 'u'){
             ori[0] = 0;
             ori[1] = -1;
-            this.currentImg = this.img[3];
+            this.spriteIndex = (3 + offset) % 8;
         } else if (dir == 'd'){
             ori[0] = 0;
             ori[1] = 1;
-            this.currentImg = this.img[2];
+            this.spriteIndex = (2 + offset) % 8;
         } else if (dir == 'r'){
             ori[0] = 1;
             ori[1] = 0;
-            this.currentImg = this.img[0];
+            this.spriteIndex = (0 + offset) % 8;
         } else if (dir == 'l'){
             ori[0] = - 1;
             ori[1] = 0;
-            this.currentImg = this.img[1];
+            this.spriteIndex = (1 + offset) % 8;
         } 
 
-        if (!this.isLinked)
-            this.room.notifyObserver(this.i, this.j, this.currentImg, 'p');
 
+        this.currentImg = img[spriteIndex];
+
+        this.room.notifyObserver(this.i, this.j, this.currentImg, 'p');
         this.updateNextPos();
     }
     
@@ -118,14 +141,43 @@ public class Player extends Body implements IPlayer {
         else {
             switch(nextId){
                 case 'b' : 
-                    this.linkBox(this.room.getBody(nextI, nextJ)); break;
+                    this.linkBody(this.room.getBody(nextI, nextJ)); break;
+                case 'k' :
+                    this.linkBody(this.room.getBody(nextI, nextJ)); break;
         }
         }
     }
 
+    public void collect(){
+        
+        this.updateNextPos();
 
+        char nextId = this.room.getId(nextI, nextJ);
 
-    public void linkBox(BodyInterface body){
+        if (this.isInventoryFull)
+            this.drop();
+        else {
+            switch(nextId){
+                case 'k' : 
+                    this.collectBody(this.room.getBody(nextI, nextJ)); break;
+        }
+        }
+    }
+
+    public void drop(){
+        if (this.room.canMove(nextI, nextJ)){
+            this.room.setActor(this.collectedItem, nextI, nextJ);
+            this.isInventoryFull = false;
+        }
+    }
+
+    public void collectBody(BodyInterface body){
+       this.collectedItem = body; 
+       this.isInventoryFull = true;
+       this.room.clearActor(nextI, nextJ);
+    }
+
+    public void linkBody(BodyInterface body){
             this.isLinked = true;
             this.linkedBody = body;
             this.linkOrientation[0] = this.ori[0];

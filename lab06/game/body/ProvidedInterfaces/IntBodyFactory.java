@@ -6,4 +6,6 @@ public interface IntBodyFactory {
    public BodyInterface create(char type, int i, int j); 
 
    public IPlayer createPlayer(int i, int j);
+
+   public IButton createButton(int i, int j);
 }

@@ -29,12 +29,14 @@ public class KeyboardInput extends KeyAdapter implements ReqIPlayer, RICamera, I
             player.invert();
         else if (key == KeyEvent.VK_E)
             player.interact();
+        else if (key == KeyEvent.VK_C)
+            player.collect();
         else if (key == KeyEvent.VK_RIGHT){
             this.camera.rotateCamera('r');
         }
         else if (key == KeyEvent.VK_LEFT){
             this.camera.rotateCamera('l');
-        }
+        } 
     }
 
 

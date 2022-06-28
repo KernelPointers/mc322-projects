@@ -31,4 +31,6 @@ public interface IRoom {
     public BodyInterface getBody(int i, int j);
 
     public void notifyObserver(int i, int j, BufferedImage img, char id);
+
+    public boolean getInv();
 }

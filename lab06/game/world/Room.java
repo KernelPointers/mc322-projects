@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 
 import game.body.*;
+import game.body.ProvidedInterfaces.IButton;
 import game.body.ProvidedInterfaces.IPlayer;
 import game.body.ProvidedInterfaces.IntBodyFactory;
 import game.controller.ProvidedInterfaces.IKeyboard;
@@ -35,11 +36,19 @@ public class Room implements IRoom, Subject{
 				char cellValue = buildCmd.charAt(i);
         IntBodyFactory bodyFact = AbstractFactory.createBodyFactory();
 
+        
+
         if (cellValue == 'p'){
             IPlayer body = bodyFact.createPlayer(y, x);
             body.connect(this);
             this.setKeyInput(body , keyInput); 
             Cell c = new Cell(body, y, x);
+            cells[y][x] = c;
+        } else if (cellValue == 'a'){
+            IButton body = bodyFact.createButton(y, x);
+            body.connect(this);
+            Cell c = new Cell(body, y, x);
+            c.setButton(body);
             cells[y][x] = c;
         } else {
             BodyInterface body = bodyFact.create(cellValue, y, x);
@@ -66,6 +75,10 @@ public class Room implements IRoom, Subject{
 
     public void detach(IntViewRoom obs){
       this.subscribers.remove(obs);
+    }
+
+    public boolean getButtonStats(int i, int j){
+      return this.cells[i][j].getButtonStatus();
     }
 
     public void changeTargetRoom(Room room){
@@ -104,13 +117,14 @@ public class Room implements IRoom, Subject{
 
     public void setActor(BodyInterface actor, int i, int j){
       this.cells[i][j].setActor(actor);
-      this.notifyObserver(i, j, actor.getCurrentImage(), actor.getId());
+      this.notifyObserver(i, j, actor.getCurrentImage(this.isInverted), actor.getId());
     }
 
     public void clearActor(int i, int j){
       BodyInterface empty = AbstractFactory.createBodyFactory().create('#', i, j);
       this.cells[i][j].clearActor(empty);
       this.notifyObserver(i, j, null, '#');
+    
     }
 
     @Override
@@ -124,9 +138,15 @@ public class Room implements IRoom, Subject{
       return false;
     }
 
+    public boolean hasButton(int i, int j){
+      if (this.cells[i][j].hasButton())
+        return true;
+      return false;
+    }
+
     @Override
     public BufferedImage getImg(int i, int j) {
-      return this.cells[i][j].getImg();
+      return this.cells[i][j].getImg(this.isInverted);
     }
 
     public void setKeyInput(IPlayer player, IKeyboard keyInput){
@@ -166,6 +186,12 @@ public class Room implements IRoom, Subject{
 
     public BodyInterface getBody(int i, int j){
       return this.cells[i][j].getBody();
+    }
+
+    @Override
+    public boolean getInv() {
+        return this.isInverted;
+      
     }
  
 }

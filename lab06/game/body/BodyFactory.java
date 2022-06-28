@@ -1,5 +1,6 @@
 package game.body;
 
+import game.body.ProvidedInterfaces.IButton;
 import game.body.ProvidedInterfaces.IPlayer;
 import game.body.ProvidedInterfaces.IntBodyFactory;
 
@@ -29,6 +30,8 @@ public class BodyFactory implements IntBodyFactory{
                 body = new Lever('l', i, j); break;
             case 'v': // void
                 body = new Void('v', i, j);
+            case 's':
+                body = new Spike('s', i, j);
         }
         return body;
    }
@@ -36,5 +39,10 @@ public class BodyFactory implements IntBodyFactory{
    public IPlayer createPlayer(int i, int j){
        IPlayer player = new Player('p', i, j);
        return player;
+   }
+
+   public IButton createButton(int i, int j){
+       IButton button = new Button('a',i,j);
+       return button;
    }
 }

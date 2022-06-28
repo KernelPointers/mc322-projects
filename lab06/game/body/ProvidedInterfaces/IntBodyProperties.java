@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public interface IntBodyProperties {
     public char getId();
     public BufferedImage[] getImg();
-    public BufferedImage getCurrentImage();
+    public BufferedImage getCurrentImage(boolean isInv);
     public int getI();
     public int getJ();
     public void setI(int i);

@@ -137,9 +137,15 @@ public class Window extends Canvas implements IWindow, RIKeyboardInput{
            for (int j = 0; j < xNUm; j++){
                 int x = 80 * j; 
                 char id = this.viewRoom.getId(i, j);
+                boolean button = viewRoom.hasButton(i, j);
                 if(id != 'v'){
                    
                     this.drawComponent(g, x, y, current); 
+
+                    if (button){
+                        this.viewRoom.setButtonStats(this.viewRoom.getButtonStats(i, j), i, j);
+                        this.drawComponent(g, x, y, this.viewRoom.getButtonImg(i, j));
+                    }
                     
                     if (id != '#')    
                         this.drawComponent(g, x, y, this.viewRoom.getImg(i, j));

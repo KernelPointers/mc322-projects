@@ -12,7 +12,7 @@ public class ViewRoom implements IntViewRoom{
     private ViewCell[][] viewCells;
     private Subject sub;
     private boolean newRoom = true;
-    private boolean isInv = false;
+    private boolean isInv;
 
     public ViewRoom(){
         this.viewCells = new ViewCell[iNum][jNum];
@@ -32,6 +32,14 @@ public class ViewRoom implements IntViewRoom{
 
     public int getJnum(){
         return this.jNum;
+    }
+
+    public boolean hasButton(int i, int j){
+        return this.viewCells[i][j].hasButton();
+    }
+
+    public BufferedImage getButtonImage(int i, int j){
+        return this.viewCells[i][j].getBImg();
     }
 
     public BufferedImage getImg(int i, int j){
@@ -75,22 +83,36 @@ public class ViewRoom implements IntViewRoom{
     @Override
     public void build() {
         if (this.newRoom){
-            // clearscreen
+
+            if (this.sub.getInv()){
+                this.isInv = true;
+            } else {
+                this.isInv = false;
+            }
+
             for (int i = 0; i < this.iNum; i++){
                 for (int j = 0; j < this.jNum; j++){
                     ViewCell cell = new ViewCell();
                     char id = sub.getId(i, j);
+                    boolean buttonStatus = sub.getButtonStats(i, j);
                     if (id == 'p'){
                         this.playerI = i;
                         this.playerJ = j;
                     }
+                  
                     BufferedImage img = sub.getImg(i, j);
                     cell.setImg(img, id);
+                    cell.setButton(sub.hasButton(i, j));
+                    cell.setButtonStatus(buttonStatus);
                     viewCells[i][j] = cell;
                 }
             } 
             this.toogleRoomStatus();
         }
+    }
+
+    public boolean getButtonStats(int i, int j){
+        return this.sub.getButtonStats(i, j);
     }
 
 
@@ -120,5 +142,15 @@ public class ViewRoom implements IntViewRoom{
             this.isInv = false;
         else
             this.isInv = true;
+    }
+
+    @Override
+    public BufferedImage getButtonImg(int i, int j) {
+        return this.viewCells[i][j].getBImg();
+    }
+
+    @Override
+    public void setButtonStats(boolean bool, int i, int j) {
+        this.viewCells[i][j].setButtonStatus(bool);
     }
 }
