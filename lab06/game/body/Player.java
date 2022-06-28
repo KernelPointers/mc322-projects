@@ -19,7 +19,7 @@ public class Player extends Body implements IPlayer {
     private BodyInterface collectedItem;
     private int[] ori = new int[2]; // vetor de orientacao
     private char dir;
-    private int spawnI = 7, spawnJ = 15;
+    private int spawnI = 15, spawnJ = 4;
     private boolean running = true;
 
     public Player(char id, int i, int j){
@@ -141,11 +141,11 @@ public class Player extends Body implements IPlayer {
     }
     
     public void moveToNextRoom(){
-        this.changeRoom(this.room.getNextRoom(), 7, 1);
+        this.changeRoom(this.room.getNextRoom(), 15, 4);
     }
 
     public void moveToLastRoom(){
-        this.changeRoom(this.room.getLastRoom(), 7, 22);
+        this.changeRoom(this.room.getLastRoom(), 15, 4);
     }
 
     @Override

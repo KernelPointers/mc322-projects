@@ -25,11 +25,11 @@ public class BodyFactory implements IntBodyFactory{
             case 'k' : // key
                 body = new Key('k', i, j); break;
             case 'v': // void
-                body = new Void('v', i, j);
+                body = new Void('v', i, j); break;
             case 's': // spike
-                body = new Spike('s', i, j);
+                body = new Spike('s', i, j); break;
             case 'h': // hole
-                body = new Hole('h', i, j);
+                body = new Hole('h', i, j); break;
         }
         return body;
    }
