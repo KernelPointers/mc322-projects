@@ -51,17 +51,17 @@ O protagonista tem a habilidade de “inverter o mundo”, permitindo que explor
 
 ## Controles
 
-    * `w` - move o personagem para frente 
+* `w` - move o personagem para frente 
 
-    * `a` - move o personagem para esquerda
+* `a` - move o personagem para esquerda
 
-    * `s` - move o personagem para baixo
+* `s` - move o personagem para baixo
 
-    * `d` - move o personagem para direita
+* `d` - move o personagem para direita
 
-    * `e` - interage com items
+* `e` - interage com items
 
-    * `c` - coleta a chave
+* `c` - coleta a chave
 
 
 # Diagramas
