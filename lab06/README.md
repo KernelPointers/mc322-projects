@@ -103,7 +103,7 @@ sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
 ## Mecanicas
 
-###Vetor de Orientacao
+### Vetor de Orientacao
 
 O personagem possui um vetor que indica a posicao para onde esta encarando, 
 isso nos permite saber com qual celula o player pretende interagir ou coletar
