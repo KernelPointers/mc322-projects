@@ -2,13 +2,16 @@
 
 # Descrição
 
-B-Side Dungeon e um jogo linear onde o jogador deve resolver puzzles para prosseguir entre salas;
-
-O protagonista tem a habilidade de “inverter o mundo”, permitindo que explore e atinja regiões antes inacessíveis;
+B-Side Dungeon é um jogo linear no qual o mundo a ser explorado é composto por salas,
+e o jogador deve resolver puzzles para prosseguir entre tais salas;
+Cada sala do mundo real está ligada a uma sala do "mundo invertido", adicionando a mecânica na qual
+o protagonista tem a habilidade de “inverter o mundo”, permitindo que explore e atinja regiões antes inacessíveis;
+A cooperação entre as ações realizadas nas salas normais e "invertidas" são essenciais para a resolução dos puzzles,
+sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
 # Equipe
-* `<Guilherme Buzzetti De Souza>` - `<235883>`
-* `<Paulo Vitor Rodrigues Nogueira>` - `<247309>`
+* `Guilherme Buzzetti De Souza` - `235883`
+* `Paulo Vitor Rodrigues Nogueira` - `247309`
 
 # Arquivo Executável do Jogo
 
@@ -63,6 +66,8 @@ O protagonista tem a habilidade de “inverter o mundo”, permitindo que explor
 
 * `c` - coleta a chave
 
+* `i` - inverte o mundo
+
 
 # Diagramas
 
@@ -72,9 +77,25 @@ O protagonista tem a habilidade de “inverter o mundo”, permitindo que explor
 
 # Arquitetura
 
+## Componentes
+
+![World](images/diagram_world.png)
+    
+![Body](images/diagram_body.png)
+    
+![Controller](images/diagram_controller.png)
+    
+![Builder](images/diagram_builder.png)
+    
+![GraphicView](images/diagram_graphicView.png)
 
 # Design Patterns
 
+## Factory
+...
+    
+## Observer
+...
 
 # Destaques de Codigo
 
