@@ -4,8 +4,10 @@
 
 B-Side Dungeon é um jogo linear no qual o mundo a ser explorado é composto por salas,
 e o jogador deve resolver puzzles para prosseguir entre tais salas;
+
 Cada sala do mundo real está ligada a uma sala do "mundo invertido", adicionando a mecânica na qual
 o protagonista tem a habilidade de “inverter o mundo”, permitindo que explore e atinja regiões antes inacessíveis;
+
 A cooperação entre as ações realizadas nas salas normais e "invertidas" são essenciais para a resolução dos puzzles,
 sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
