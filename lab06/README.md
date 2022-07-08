@@ -14,6 +14,20 @@ O protagonista tem a habilidade de “inverter o mundo”, permitindo que explor
 
 [Executável](start.jar)
 
+# Instrucoes de instalacao
+
+Clone o repositorio
+
+    git clone https://github.com/KernelPointers/mc322-projects
+
+Entre no diretorio do jogo
+
+    cd lab06
+
+Execute o arquivo .jar
+    
+    java -jar start.jar
+
 # Slides do Projeto
 
 ## Slides da Prévia
