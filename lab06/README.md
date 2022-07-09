@@ -72,6 +72,10 @@ sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
 # Diagramas
 
+## Diagrama MVC
+
+![Diagrama do MVC](images/arquiteturaMVC.png)
+
 ## Diagrama Geral da Arquitetura do Jogo
 
 ![Diagrama Geral de Componentes](images/diagrama_componentes.png)
