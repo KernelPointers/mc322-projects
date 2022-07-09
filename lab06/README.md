@@ -11,6 +11,12 @@ o protagonista tem a habilidade de “inverter o mundo”, permitindo que explor
 A cooperação entre as ações realizadas nas salas normais e "invertidas" são essenciais para a resolução dos puzzles,
 sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
+Para destrancar a porta e prosseguir para a proxima sala, o player deve encontrar uma chave, que destranca a porta,
+e ativar um botao com items do cenario para abri-la usando a mecanica de inversao.
+
+Utilizamos JavaSwing para a interface grafica do jogo, e um design baseado em componentes que segue o padrao
+MVC (model, view, controller)
+
 # Equipe
 * `Guilherme Buzzetti De Souza` - `235883`
 * `Paulo Vitor Rodrigues Nogueira` - `247309`
@@ -299,7 +305,25 @@ e modificar o seu sprite de acordo com sua direcao
         }
     }
 
+    ...
 
+     public void collect(){
+        
+        this.updateNextPos();
+
+        char nextId = this.room.getId(nextI, nextJ);
+
+        if (this.isInventoryFull)
+            this.drop(this.nextI, this.nextJ);
+        else {
+            switch(nextId){
+                case 'k' : 
+                    this.collectBody(this.room.getBody(nextI, nextJ)); break;
+            }
+        }
+    }
+
+    ...
 ~~~
 
 |![alt](images/barril1.png) |![alt](images/barril2.png)|
@@ -310,12 +334,13 @@ e modificar o seu sprite de acordo com sua direcao
 
 ### Botoes
 
+
 |![alt](images/botao1.png) |![alt](images/botao2.png) |![alt](images/botao3.png)|
 
 
 ### Morrer
 
-~~~ java
+~~~java
     public void die(){
         int lastI = this.i, lastJ = this.j;
         
@@ -332,6 +357,8 @@ e modificar o seu sprite de acordo com sua direcao
 
 |![alt](images/morrer1.png) |![alt](images/morrer2.png)|
 
+|![alt](images/morrer3.png) |![alt](images/morrer4.png)|
+
 ### Inverter Mundos
 
 ~~~ java
@@ -341,7 +368,7 @@ e modificar o seu sprite de acordo com sua direcao
         if (invRoom.canMove(this.i, this.j)){
             this.changeRoom(this.room.getInverse(), this.i, this.j);
         }
-        // msg de aviso
+
         this.unlink();
     }
 ~~~
@@ -349,6 +376,17 @@ e modificar o seu sprite de acordo com sua direcao
 |![alt](images/inverter1.png) |![alt](images/inverter2.png)|
 
 ### Abrir Portas
+
+~~~java
+    ...
+    public void unlock(){
+            this.room.getBody(nextI, nextJ).interact(this.isInventoryFull);
+            this.isInventoryFull = false;
+            this.collectedItem = null;
+    }
+    ...
+
+~~~
 
 |![alt](images/porta1.png) |![alt](images/porta2.png)|
 
@@ -408,3 +446,46 @@ Onde (Xpa, Ypa) é a coordenada absoluta do player e (Xpt, Ypt) é a coordenada 
 a tela (origem do eixo de destino da transformada T).
 
 |![alt](images/camera1.png) |![alt](images/camera2.png)|
+
+
+# Mudancas Para o Futuro
+
+Devido a restricoes de tempo, nao conseguimos finalizar todos os puzzles planejados, no entanto, e possivel
+implementa-los facilmente alterando os csv's do diretorio ./data
+
+## Criando Fases
+
+O atributo layoutNum de builder determina quantos nos de salas serao construidos
+
+~~~java
+    public class Builder implements BuilderInterface{
+        ...
+        private int layoutNum = 2;
+        ...
+
+    }
+~~~
+
+Para criar uma nova fase, basta editar esse atributo somando um no seu valor atual
+e adicionar dois arquivos csv's cada um com uma matriz de 30 x 48 de caracteres do keycode abaixo, nos diretorios
+./data/normal e ./data/inverted respectivamente, sendo que o adicionado no primeiro
+representa o mundo normal a ser construido e o segundo o invertido.
+
+Cada no deve conter pelo menos uma porta no lado esquerdo do mapa normal, um botao e uma chave
+
+* keycode:
+
+char | body
+----- | -----
+p | player
+\# | empty cell
+B | rigid block
+b | block
+a | button
+d | door
+w | wall
+k | key
+v | void
+s | spike
+h | hole
+
