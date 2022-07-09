@@ -356,7 +356,7 @@ e modificar o seu sprite de acordo com sua direcao
 ~~~
 
 |![alt](images/morrer1.png) |![alt](images/morrer2.png)|
-
+|-|-|
 |![alt](images/morrer3.png) |![alt](images/morrer4.png)|
 
 ### Inverter Mundos
