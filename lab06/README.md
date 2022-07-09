@@ -448,10 +448,14 @@ a tela (origem do eixo de destino da transformada T).
 |![alt](images/camera1.png) |![alt](images/camera2.png)|
 
 
-# Mudancas Para o Futuro
+# Problemas, correcoes e mudancas Para o Futuro
 
-Devido a restricoes de tempo, nao conseguimos finalizar todos os puzzles planejados, no entanto, e possivel
-implementa-los facilmente alterando os csv's do diretorio ./data
+Devido a restricoes de tempo, nao conseguimos finalizar o jogo conforme planejado de forma que:
+
+* Nao foi possivel finalizar todos os puzzles, desta forma, o jogo
+possui apenas duas fases, no entanto, e possivel implementar niveis facilmente alterando os csv's do diretorio ./data
+
+* O jogo nao possui um sistema que reconheca quando deveria acabar
 
 ## Criando Fases
 
@@ -471,7 +475,8 @@ e adicionar dois arquivos csv's cada um com uma matriz de 30 x 48 de caracteres 
 ./data/normal e ./data/inverted respectivamente, sendo que o adicionado no primeiro
 representa o mundo normal a ser construido e o segundo o invertido.
 
-Cada no deve conter pelo menos uma porta no lado esquerdo do mapa normal, um botao e uma chave
+Cada no deve conter pelo menos uma porta no lado esquerdo do mapa normal, um botao e uma chave,
+apenas a sala inicial pode conter o player, e apenas a sala normal deve conter uma porta
 
 * keycode:
 
