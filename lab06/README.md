@@ -85,6 +85,8 @@ sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 ## Componentes
 
 ![World](images/diagram_world.png)
+
+![Estrutura de World](images/diagram_inner.png)
     
 ![Body](images/diagram_body.png)
     
