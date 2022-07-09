@@ -139,7 +139,7 @@ do jogo, de modo que o cliente fique isento da instanciação dos objetos
 
 ## Mecanicas
 
-### Vetor de Orientacao
+### Vetor de Orientacao e Interacao
 
 O personagem possui um vetor que indica a posicao para onde esta encarando, 
 isso nos permite saber com qual celula o player pretende interagir ou coletar
@@ -147,9 +147,9 @@ e modificar o seu sprite de acordo com sua direcao
 
 ~~~java
     public class Player extends Body implements IPlayer {
-    …
-    private int[] ori = new int[2]; // vetor de orientacao
-    …
+        …
+        private int[] ori = new int[2]; // vetor de orientacao
+        …
 
         public void changeVectorOrientation(char dir){
             this.dir = dir;
@@ -190,7 +190,7 @@ e modificar o seu sprite de acordo com sua direcao
             else {
                 switch(nextId){
                     case 'b' : 
-                        this.linkBody(this.room.getBody(nextI, nextJ)); break;
+                      this.linkBody(this.room.getBody(nextI, nextJ)); break;
                     case 'k' :
                         this.linkBody(this.room.getBody(nextI, nextJ)); break;
                     case 'd':
@@ -208,3 +208,66 @@ e modificar o seu sprite de acordo com sua direcao
 |-|-|
 |![alt](images/esquerda.png) | ![alt](images/tras.png)
 
+
+### Botoes
+
+
+### Morrer
+
+### Camera
+
+A camera do jogo segue o personagem de forma a centralizar este na tela, isso
+e feito atraves de uma transformada de coordenadas quando window decide que porcao
+do view sera mostrado na tela
+
+
+~~~java
+    public int transformX(int x){
+        int tileWidth = 80;
+        return x - 
+            (this.viewRoom.getPlayerJ() * tileWidth ) + 
+            (this.viewRoom.getPlayerScreenJ() * tileWidth);
+    }
+
+    public int transformY(int y){
+        int tileHeight = 72;
+        return y - 
+            (this.viewRoom.getPlayerI() * tileHeight) + 
+            (this.viewRoom.getPlayerScreenI() * tileHeight);
+    }
+
+    public void drawComponent(Graphics2D g, int x, int y, BufferedImage img) {  
+        if (img != null){
+            int newX = transformX(x);
+            int newY = transformY(y);
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
+                               RenderingHints.VALUE_ANTIALIAS_ON);
+            AffineTransform restoreMatrix = g.getTransform();
+            g.rotate(this.angle, this.viewRoom.getPlayerScreenI(), 
+            this.viewRoom.getPlayerScreenJ());
+            …
+            g.drawImage(img, newX, newY, 80, 80, this);
+            …
+            g.setTransform(restoreMatrix);
+        }
+
+
+    }  
+
+
+~~~
+
+#### Transformada de coordenadas
+
+![Referencial](images/transformada.png)
+
+Dado esse referencial onde o eixo em roxo representa as coordenadas absolutas, e o emm vermelho
+as coordenadas relativas ao Player, quremos levar os pontos do eixo absoluto para o eixo do player
+desta forma, efetuamos a transformada T: (x, y) -> (x - Xpa + Xpt  , y - Ypa + Ypt)
+
+Onde (Xpa, Ypa) e a coordenada absoluta do player e (Xpt, Ypt) e a coordenada do player em relacao 
+a tela (origem do eixo de destino da transformada T)
+
+
+
+|![alt](images/camera1) |![alt](images/camera2)|
