@@ -313,10 +313,9 @@ e modificar o seu sprite de acordo com sua direcao
 
 ### Camera
 
-A camera do jogo segue o personagem de forma a centralizar este na tela, isso
-e feito atraves de uma transformada de coordenadas quando window decide que porcao
-do view sera mostrado na tela
-
+A câmera do jogo segue o personagem de forma a centralizar este na tela, isso
+é feito através de uma transformada de coordenadas quando a Window decide que porção
+do view será mostrado na tela
 
 ~~~java
     public int transformX(int x){
@@ -358,15 +357,13 @@ do view sera mostrado na tela
 
 ![Referencial](images/transformada.png)
 
-Dado esse referencial onde o eixo em roxo representa as coordenadas absolutas, e o emm vermelho
-as coordenadas relativas ao Player, quremos levar os pontos do eixo absoluto para o eixo do player
-desta forma, efetuamos a transformada 
+Dado esse referencial onde o eixo em roxo representa as coordenadas absolutas, e o em vermelho
+as coordenadas relativas ao Player, quremos levar os pontos do eixo absoluto para o eixo do Player.
+Desta forma, efetuamos a transformada:
 
 * `T: (x, y) -> (x - Xpa + Xpt  , y - Ypa + Ypt)`
 
-Onde (Xpa, Ypa) e a coordenada absoluta do player e (Xpt, Ypt) e a coordenada do player em relacao 
-a tela (origem do eixo de destino da transformada T)
-
-
+Onde (Xpa, Ypa) é a coordenada absoluta do player e (Xpt, Ypt) é a coordenada do Player em relação 
+a tela (origem do eixo de destino da transformada T).
 
 |![alt](images/camera1.png) |![alt](images/camera2.png)|
