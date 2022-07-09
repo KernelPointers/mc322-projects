@@ -5,16 +5,16 @@
 B-Side Dungeon é um jogo linear no qual o mundo a ser explorado é composto por salas,
 e o jogador deve resolver puzzles para prosseguir entre tais salas;
 
-Cada sala do mundo real está ligada a uma sala do "mundo invertido", adicionando a mecânica na qual
+Cada sala do mundo real está ligada a uma sala do "mundo invertido", adicionando uma mecânica na qual
 o protagonista tem a habilidade de “inverter o mundo”, permitindo que explore e atinja regiões antes inacessíveis;
 
 A cooperação entre as ações realizadas nas salas normais e "invertidas" são essenciais para a resolução dos puzzles,
 sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
 Para destrancar a porta e prosseguir para a proxima sala, o player deve encontrar uma chave, que destranca a porta,
-e ativar um botao com items do cenario para abri-la usando a mecanica de inversao.
+e ativar um botao com items do cenário para abri-la usando a mecânica de inversão.
 
-Utilizamos JavaSwing para a interface grafica do jogo, e um design baseado em componentes que segue o padrao
+Utilizamos JavaSwing para a interface gráfica do jogo, e um design baseado em componentes que segue o padrão
 MVC (model, view, controller)
 
 # Equipe
