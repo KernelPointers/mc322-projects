@@ -17,6 +17,8 @@ e ativar um botao com items do cenário para abri-la usando a mecânica de inver
 Utilizamos JavaSwing para a interface gráfica do jogo, e um design baseado em componentes que segue o padrão
 MVC (model, view, controller)
 
+Infelizmente, devido a restricoes de tempo, o jogo nao foi finalizado totalmente e apresenta alguns problemas (vide Problemas, correcoes e mudancas Para o Futuro)
+
 # Equipe
 * `Guilherme Buzzetti De Souza` - `235883`
 * `Paulo Vitor Rodrigues Nogueira` - `247309`
@@ -163,7 +165,9 @@ Interfaces | `IntViewRoom, IWindow, RIKeyboardInput`
 
 # Destaques de Orientação a objetos
 
-## Heranca e classe abstrata em body
+## Heranca e classe abstrata 
+
+* Body
 
 Body e uma classe abstrata que representa os objetos que ocupam uma cell da matriz
 de room
@@ -182,6 +186,7 @@ de room
         ...
 
     }
+~~~
 
 Ela e uma superclasse relativa a todos os tipos de objeto em body. E.g:
 
@@ -191,7 +196,9 @@ Ela e uma superclasse relativa a todos os tipos de objeto em body. E.g:
     }
 ~~~
 
-## Polimorfismo em cell
+## Polimorfismo 
+
+* Cell
 
 Cell recebe uma interface de body que foi instanciada em uma classe
 específica, caracterizando uma forma de polimorfismo
@@ -204,6 +211,34 @@ específica, caracterizando uma forma de polimorfismo
     ...
 
     }
+~~~
+
+* Metodo Player.interact
+
+O player interage com uma interface de body generica, sendo que
+a acao realizada depende do tipo específico desta baseado no seu id
+
+~~~java
+    @Override
+     public void interact(){
+        this.updateNextPos();
+
+        char nextId = this.room.getId(nextI, nextJ);
+
+        if (this.isLinked)
+            this.unlink();
+        else {
+            switch(nextId){
+                case 'b' : 
+                    this.linkBody(this.room.getBody(nextI, nextJ)); break;
+                case 'k' :
+                    this.linkBody(this.room.getBody(nextI, nextJ)); break;
+                case 'd':
+                    this.unlock();
+            }
+        }
+    }
+
 ~~~
 
 
@@ -330,6 +365,25 @@ e sua respectiva viewRoom, de modo que a atualização da tela seja feita dinâm
 
     }
 ~~~
+
+## Singleton
+
+World implementa um singleton, pois possui uma unica instancia que e usada para a execucao do jogo
+
+~~~java
+    public class World implements WorldInterface{
+        ...
+        private static final World instance = new World();
+        
+        public static World getInstance(){
+            return instance;
+        
+        }
+        ...
+    }
+
+~~~
+
 
 # Destaques de Código
 
