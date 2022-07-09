@@ -42,7 +42,6 @@ sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 
 # Slides do Projeto
 
-## Slides da Prévia
 
 [Slides](slide.pdf)
 
@@ -219,7 +218,7 @@ e sua respectiva viewRoom, de modo que a atualização da tela seja feita dinâm
 
 ## Mecanicas
 
-### Vetor de Orientacao e Interacao
+### Vetor de Orientacao
 
 O personagem possui um vetor que indica a posicao para onde esta encarando, 
 isso nos permite saber com qual celula o player pretende interagir ou coletar
@@ -260,33 +259,47 @@ e modificar o seu sprite de acordo com sua direcao
             this.updateNextPos();
         }
 
-        public void interact(){
-            this.updateNextPos();
-
-            char nextId = this.room.getId(nextI, nextJ);
-
-            if (this.isLinked)
-                this.unlink();
-            else {
-                switch(nextId){
-                    case 'b' : 
-                      this.linkBody(this.room.getBody(nextI, nextJ)); break;
-                    case 'k' :
-                        this.linkBody(this.room.getBody(nextI, nextJ)); break;
-                    case 'd':
-                        this.unlock();
-                }
-            }
-        }
 
     …
 
     }
 ~~~
 
+
 |![alt](images/direita.png) |![alt](images/frente.png)|
 |-|-|
 |![alt](images/esquerda.png) | ![alt](images/tras.png)
+
+
+#### Interacao
+
+~~~java
+    public void interact(){
+        this.updateNextPos();
+
+        char nextId = this.room.getId(nextI, nextJ);
+
+        if (this.isLinked)
+            this.unlink();
+        else {
+            switch(nextId){
+                case 'b' : 
+                    this.linkBody(this.room.getBody(nextI, nextJ)); break;
+                case 'k' :
+                    this.linkBody(this.room.getBody(nextI, nextJ)); break;
+            case 'd':
+                this.unlock();
+            }
+        }
+    }
+
+
+~~~
+
+|![alt](images/barril1.png) |![alt](images/barril2.png)|
+|-|-|
+|![alt](images/chave1.png) | ![alt](images/chave2.png)
+
 
 
 ### Botoes
