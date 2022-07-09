@@ -102,6 +102,53 @@ MVC (model, view, controller)
     
 ![GraphicView](images/diagram_graphicView.png)
 
+
+# Destaques de Orientacao a objetos
+
+## Heranca e classe abstrata em body
+
+Body e uma classe abstrata que representa os objetos que ocupam uma cell da matriz
+de room
+
+~~~java
+
+    public abstract class Body implements BodyInterface, RIRoom{
+        protected char id;
+        protected int i, j; // coordenadas globais
+        protected boolean isTangible = true;
+        protected BufferedImage img[];
+        protected IRoom room;
+        protected BufferedImage currentImg;
+    
+        ...
+        ...
+
+    }
+
+Ela e uma superclasse relativa a todos os tipos de objeto em body. E.g:
+
+~~~java
+    public class Player extends Body implements IPlayer {
+    ...
+    }
+~~~
+
+## Polimorfismo em cell
+
+Cell recebe uma interface de body que foi instanciada em uma classe
+especifica, caracterizando uma forma de polimorfismo
+
+~~~java
+    public class Cell {
+    ...
+
+        private BodyInterface body;
+    ...
+
+    }
+~~~
+
+
 # Design Patterns
 
 ## Factory
