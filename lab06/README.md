@@ -94,7 +94,43 @@ sendo o objetivo final: passar por todas as salas se libertando da Dungeon.
 # Design Patterns
 
 ## Factory
-...
+
+Utilizamos o Design Pattern Factory para a instanciação dos Componentes principais
+do jogo, de modo que o cliente fique isento da instanciação dos objetos
+
+~~~java
+   public class AbstractFactory {
+        public static IntBuilderFactory createBuilderFactory(){
+            IntBuilderFactory factory = null;
+            factory = new BuilderFactory();
+            return factory;
+        }
+
+        public static IntWorldFactory createWorldFactory(){
+            IntWorldFactory factory = null;
+            factory = new WorldFactory();
+            return factory;   
+        }
+
+        public static IntBodyFactory createBodyFactory(){
+            IntBodyFactory factory = null;
+            factory = new BodyFactory();
+            return factory;
+        }
+
+        public static IntControllerFactory createControllerFactory(){
+            IntControllerFactory factory = null;
+            factory = new ControllerFactory();
+            return factory;
+        }
+
+        public static IgraphicViewFactory createViewFactory(){
+            IgraphicViewFactory factory = null;
+            factory = new ViewFactory();
+            return factory;
+        }
+    }
+~~~
     
 ## Observer
 ...
