@@ -348,6 +348,10 @@ e modificar o seu sprite de acordo com sua direcao
 
 |![alt](images/inverter1.png) |![alt](images/inverter2.png)|
 
+### Abrir Portas
+
+|![alt](images/porta1.png) |![alt](images/porta2.png)|
+
 ### Camera
 
 A câmera do jogo segue o personagem de forma a centralizar este na tela, isso
