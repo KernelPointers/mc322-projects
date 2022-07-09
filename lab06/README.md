@@ -133,7 +133,48 @@ do jogo, de modo que o cliente fique isento da instanciação dos objetos
 ~~~
     
 ## Observer
-...
+
+Utilizamos também o Design Pattern Observer para realizar a ligação entre os objetos da matriz de Células das Salas
+e sua respectiva viewRoom, de modo que a atualização da tela seja feita dinâmicamente.
+
+~~~ java
+    public class Room implements IRoom, Subject{
+        ...
+        private ArrayList<IntViewRoom> subscribers = new ArrayList<IntViewRoom>();
+        ...
+  
+        public void attach(IntViewRoom obs){
+            this.subscribers.add(obs);
+        }
+
+        public void detach(IntViewRoom obs){
+            this.subscribers.remove(obs);
+        }
+ 
+        public void changeTargetRoom(Room room){
+            IntViewRoom obs = this.subscribers.get(0);
+            obs.toogleRoomStatus();
+            obs.setSubject(room);
+            obs.build();
+            this.detach(obs);
+            room.attach(obs);
+        }    
+
+        public void notifyObserver(int i, int j, BufferedImage img, char id){
+            for (IntViewRoom obs : this.subscribers) 
+                obs.update(i, j, img, id);
+        }
+        
+        ...
+    }
+~~~
+~~~ java
+    public interface IObs {
+        public void update(int i, int j, BufferedImage img, char id);
+        public void toogleRoomStatus();
+        ...        
+    }
+~~~
 
 # Destaques de Codigo
 
