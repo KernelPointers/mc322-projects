@@ -17,7 +17,7 @@ e ativar um botao com items do cenário para abri-la usando a mecânica de inver
 Utilizamos JavaSwing para a interface gráfica do jogo, e um design baseado em componentes que segue o padrão
 MVC (model, view, controller)
 
-Infelizmente, devido a restricoes de tempo, o jogo nao foi finalizado totalmente e apresenta alguns problemas (vide Problemas, correcoes e mudancas Para o Futuro)
+Infelizmente, devido a restricões de tempo, o jogo não foi finalizado totalmente e apresenta alguns problemas (Problemas, correções e mudanças Para o Futuro)
 
 # Equipe
 * `Guilherme Buzzetti De Souza` - `235883`
@@ -368,7 +368,7 @@ e sua respectiva viewRoom, de modo que a atualização da tela seja feita dinâm
 
 ## Singleton
 
-World implementa um singleton, pois possui uma unica instancia que e usada para a execucao do jogo
+World implementa um singleton, pois possui uma única instância que é usada para a execução do jogo
 
 ~~~java
     public class World implements WorldInterface{
