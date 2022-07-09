@@ -88,19 +88,77 @@ MVC (model, view, controller)
 
 # Arquitetura
 
-## Componentes
+## Componente `World`
+
+World é o componente que representa o mundo do jogo.
+Ele guarda um vetor de Nós no qual cada nó contem
+dois objetos salas (uma sala 'normal' e sua respectiva 'anti-sala').
+Cada sala é um objeto que contém uma matriz de células.
 
 ![World](images/diagram_world.png)
-
 ![Estrutura de World](images/diagram_inner.png)
-    
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `./src/game/world`
+Interfaces | `WorldInterface, IntViewRoom, Ikeyboard`
+
+## Componente `Body`
+
+Body é o componente que representa os corpos que preenchem as salas.
+
 ![Body](images/diagram_body.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `./src/game/body`
+Interfaces | `BodyInterface, IRoom, RIRoom`
+
+## Componente `Controller`
+
+Controller é o componente que controla o fluxo de execução do jogo.
+A classe Control possui um método control.run que executa o jogo.
+GameController possui o loop de execução do jogo, no qual recebe uma
+interface de GraphicView e atualiza a imagem na tela.
     
 ![Controller](images/diagram_controller.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `./src/game/controller`
+Interfaces | `ControllerInterface, RIWindow, Runnable`
+
+## Componente `Builder`
+
+Builder é o componente responsável pela instanciação do Mundo e suas instâncias de classes
     
 ![Builder](images/diagram_builder.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `./src/game/builder`
+Interfaces | `BuilderInterface`
+
+## Componente `GraphicView`
+
+GraphicVIew é o componente responsável por mostrar na tela o conteudo atual da sala.
+Através do Design Pattern Observer ele observa a sala de índice atual e atualiza
+a vista cada vez que a sala é modificada.
+A classe viewRoom contém uma matriz de viewCeells que tem como atributo a imagem a ser mostrada
+em cada célula, atualizada de acordo com o modelo Room.
+A classe Window é uma janela do swing que mostra as imagens da matriz do viewRoom na tela.
     
 ![GraphicView](images/diagram_graphicView.png)
+
+**Ficha Técnica**
+item | detalhamento
+----- | -----
+Classe | `./src/game/graphicView`
+Interfaces | `IntViewRoom, IWindow, RIKeyboardInput`
 
 
 # Destaques de Orientacao a objetos
