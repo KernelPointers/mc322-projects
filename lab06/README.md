@@ -168,11 +168,50 @@ e sua respectiva viewRoom, de modo que a atualização da tela seja feita dinâm
         ...
     }
 ~~~
-~~~ java
+
+~~~java
     public interface IObs {
         public void update(int i, int j, BufferedImage img, char id);
         public void toogleRoomStatus();
         ...        
+    }
+~~~
+
+~~~java
+    public interface RIObs {
+        public void setSubject(Subject sub);  
+    }
+~~~
+
+~~~java
+    public interface IntViewRoom extends 
+            IObs, RIObs, IViewRoom{
+
+    }
+~~~
+
+~~~java
+    public class ViewRoom implements IntViewRoom{
+    ...
+        private Subject sub;
+    ...
+
+        @Override
+        public void update(int i, int j, BufferedImage sprite, char id){
+            if (id == 'p'){
+                this.playerI = i;
+                this.playerJ = j;
+            }
+            if (this.viewCells[i][j] != null)
+                this.viewCells[i][j].setImg(sprite, id);
+        }
+
+        @Override
+        public void setSubject(Subject sub){
+            this.sub = sub;
+        }
+
+
     }
 ~~~
 
@@ -304,7 +343,9 @@ do view sera mostrado na tela
 
 Dado esse referencial onde o eixo em roxo representa as coordenadas absolutas, e o emm vermelho
 as coordenadas relativas ao Player, quremos levar os pontos do eixo absoluto para o eixo do player
-desta forma, efetuamos a transformada T: (x, y) -> (x - Xpa + Xpt  , y - Ypa + Ypt)
+desta forma, efetuamos a transformada 
+
+* T: (x, y) -> (x - Xpa + Xpt  , y - Ypa + Ypt)
 
 Onde (Xpa, Ypa) e a coordenada absoluta do player e (Xpt, Ypt) e a coordenada do player em relacao 
 a tela (origem do eixo de destino da transformada T)
