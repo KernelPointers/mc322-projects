@@ -345,11 +345,11 @@ Dado esse referencial onde o eixo em roxo representa as coordenadas absolutas, e
 as coordenadas relativas ao Player, quremos levar os pontos do eixo absoluto para o eixo do player
 desta forma, efetuamos a transformada 
 
-* T: (x, y) -> (x - Xpa + Xpt  , y - Ypa + Ypt)
+* `T: (x, y) -> (x - Xpa + Xpt  , y - Ypa + Ypt)`
 
 Onde (Xpa, Ypa) e a coordenada absoluta do player e (Xpt, Ypt) e a coordenada do player em relacao 
 a tela (origem do eixo de destino da transformada T)
 
 
 
-|![alt](images/camera1) |![alt](images/camera2)|
+|![alt](images/camera1.png) |![alt](images/camera2.png)|
