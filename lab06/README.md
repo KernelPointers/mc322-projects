@@ -310,6 +310,8 @@ e modificar o seu sprite de acordo com sua direcao
 
 ### Botoes
 
+|![alt](images/botao1.png) |![alt](images/botao2.png) |![alt](images/botao3.png)|
+
 
 ### Morrer
 
