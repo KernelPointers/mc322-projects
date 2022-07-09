@@ -313,6 +313,23 @@ e modificar o seu sprite de acordo com sua direcao
 
 ### Morrer
 
+~~~ java
+    public void die(){
+        int lastI = this.i, lastJ = this.j;
+        
+        if (this.room.getInv())
+            this.changeRoom(this.room.getInverse(), i, j);
+
+        this.room.swapBody(this.i, this.j, this.spawnI, this.spawnJ);
+        
+        this.unlink();
+        if (this.isInventoryFull)
+            this.drop(lastI, lastJ);
+    }
+~~~
+
+|![alt](images/morrer1.png) |![alt](images/morrer2.png)|
+
 ### Camera
 
 A câmera do jogo segue o personagem de forma a centralizar este na tela, isso
