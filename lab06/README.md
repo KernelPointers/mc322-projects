@@ -287,8 +287,8 @@ e modificar o seu sprite de acordo com sua direcao
                     this.linkBody(this.room.getBody(nextI, nextJ)); break;
                 case 'k' :
                     this.linkBody(this.room.getBody(nextI, nextJ)); break;
-            case 'd':
-                this.unlock();
+                case 'd':
+                    this.unlock();
             }
         }
     }
