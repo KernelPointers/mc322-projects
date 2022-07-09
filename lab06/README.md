@@ -51,7 +51,7 @@ MVC (model, view, controller)
 
 [Slides](slide.pdf)
 
-# Instrucoes de instalacao
+# Instrucões de instalação
 
     git clone https://github.com/KernelPointers/mc322-projects #Clone o repositorio
     cd lab06 #Entre no diretorio do jogo
@@ -161,7 +161,7 @@ Classe | `./src/game/graphicView`
 Interfaces | `IntViewRoom, IWindow, RIKeyboardInput`
 
 
-# Destaques de Orientacao a objetos
+# Destaques de Orientação a objetos
 
 ## Heranca e classe abstrata em body
 
@@ -194,7 +194,7 @@ Ela e uma superclasse relativa a todos os tipos de objeto em body. E.g:
 ## Polimorfismo em cell
 
 Cell recebe uma interface de body que foi instanciada em uma classe
-especifica, caracterizando uma forma de polimorfismo
+específica, caracterizando uma forma de polimorfismo
 
 ~~~java
     public class Cell {
@@ -331,15 +331,15 @@ e sua respectiva viewRoom, de modo que a atualização da tela seja feita dinâm
     }
 ~~~
 
-# Destaques de Codigo
+# Destaques de Código
 
-## Mecanicas
+## Mecânicas
 
-### Vetor de Orientacao
+### Vetor de Orientação
 
-O personagem possui um vetor que indica a posicao para onde esta encarando, 
-isso nos permite saber com qual celula o player pretende interagir ou coletar
-e modificar o seu sprite de acordo com sua direcao
+O personagem possui um vetor que indica a posição para onde está encarando, 
+isso nos permite saber com qual célula o player pretende interagir ou coletar
+e modificar o seu sprite de acordo com sua direção
 
 ~~~java
     public class Player extends Body implements IPlayer {
@@ -388,7 +388,7 @@ e modificar o seu sprite de acordo com sua direcao
 |![alt](images/esquerda.png) | ![alt](images/tras.png)
 
 
-#### Interacao
+#### Interação
 
 ~~~java
     public void interact(){
@@ -437,11 +437,9 @@ e modificar o seu sprite de acordo com sua direcao
 
 
 
-### Botoes
-
+### Botões
 
 |![alt](images/botao1.png) |![alt](images/botao2.png) |![alt](images/botao3.png)|
-
 
 ### Morrer
 
@@ -495,7 +493,7 @@ e modificar o seu sprite de acordo com sua direcao
 
 |![alt](images/porta1.png) |![alt](images/porta2.png)|
 
-### Camera
+### Câmera
 
 A câmera do jogo segue o personagem de forma a centralizar este na tela, isso
 é feito através de uma transformada de coordenadas quando a Window decide que porção
@@ -553,18 +551,18 @@ a tela (origem do eixo de destino da transformada T).
 |![alt](images/camera1.png) |![alt](images/camera2.png)|
 
 
-# Problemas, correcoes e mudancas Para o Futuro
+# Problemas, correções e mudancas Para o Futuro
 
-Devido a restricoes de tempo, nao conseguimos finalizar o jogo conforme planejado de forma que:
+Devido a restrições de tempo, não conseguimos finalizar o jogo conforme planejado de forma que:
 
-* Nao foi possivel finalizar todos os puzzles, desta forma, o jogo
-possui apenas duas fases, no entanto, e possivel implementar niveis facilmente alterando os csv's do diretorio ./data
+* Não foi possível finalizar todos os puzzles, desta forma, o jogo possui apenas duas fases,
+no entanto, é possível implementar niveis facilmente alterando os csv's do diretorio ./data
 
-* O jogo nao possui um sistema que reconheca quando deveria acabar
+* O jogo não possui um sistema que reconheca quando deveria acabar
 
 ## Criando Fases
 
-O atributo layoutNum de builder determina quantos nos de salas serao construidos
+O atributo layoutNum de builder determina quantos nós de salas serão construídos
 
 ~~~java
     public class Builder implements BuilderInterface{
@@ -576,11 +574,11 @@ O atributo layoutNum de builder determina quantos nos de salas serao construidos
 ~~~
 
 Para criar uma nova fase, basta editar esse atributo somando um no seu valor atual
-e adicionar dois arquivos csv's cada um com uma matriz de 30 x 48 de caracteres do keycode abaixo, nos diretorios
+e adicionar dois arquivos csv's cada um com uma matriz de 30 x 48 de caracteres do keycode abaixo, nos diretórios
 ./data/normal e ./data/inverted respectivamente, sendo que o adicionado no primeiro
-representa o mundo normal a ser construido e o segundo o invertido.
+representa o mundo normal a ser construído e o segundo o invertido.
 
-Cada no deve conter pelo menos uma porta no lado esquerdo do mapa normal, um botao e uma chave,
+Cada nó deve conter pelo menos uma porta no lado esquerdo do mapa normal, um botão e uma chave,
 apenas a sala inicial pode conter o player, e apenas a sala normal deve conter uma porta
 
 * keycode:
@@ -598,4 +596,3 @@ k | key
 v | void
 s | spike
 h | hole
-
