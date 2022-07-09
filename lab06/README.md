@@ -332,6 +332,22 @@ e modificar o seu sprite de acordo com sua direcao
 
 |![alt](images/morrer1.png) |![alt](images/morrer2.png)|
 
+### Inverter Mundos
+
+~~~ java
+    public void invert(){
+        IRoom invRoom = room.getInverse();
+        this.invertImg();
+        if (invRoom.canMove(this.i, this.j)){
+            this.changeRoom(this.room.getInverse(), this.i, this.j);
+        }
+        // msg de aviso
+        this.unlink();
+    }
+~~~
+
+|![alt](images/inverter1.png) |![alt](images/inverter2.png)|
+
 ### Camera
 
 A câmera do jogo segue o personagem de forma a centralizar este na tela, isso
